@@ -75,7 +75,7 @@ function init() { // MemoryGame()
       var cardIconEl = document.createElement('i');
 
       cardEl.classList.add('card');
-      cardEl.classList.add('show'); // debugging, add show card class
+      // cardEl.classList.add('show'); // debugging, add show card class
       cardIconEl.classList.add('fa');
       cardIconEl.classList.add(`fa-${myArr[i]}`);
 
@@ -83,11 +83,18 @@ function init() { // MemoryGame()
 
       deckEl.appendChild(cardEl);
     }
+  } // end of displayCards function
+
+
+  function showCard(evt) {
+
+    // return if target card is already showing or is already apart of a match
+    if (evt.target.classList.contains('show') || evt.target.classList.contains('match')) {
+      return;
+    }
+
+    evt.target.classList.add('open', 'show');
   }
-
-  displayCards();
-
-
 
 
 
