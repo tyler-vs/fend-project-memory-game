@@ -1,5 +1,13 @@
+// app.js
 
-function init() {
+
+// initialize function runs when the DOMContentLoaded event fires
+function init() { // MemoryGame()
+
+
+  /**
+   * VARIABLES
+   */
 
   /*
    * Create a list that holds all of your cards
@@ -25,6 +33,11 @@ function init() {
     'bomb',
     'bomb'
   ];
+
+
+  /**
+   * FUNCTIONS
+   */
 
   console.log(myArr.length); // 8
 
@@ -90,11 +103,36 @@ function init() {
    *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
    */
 
+   deckEl.addEventListener('click', function(evt){
+    if (!evt.target.matches('.card')) {
+      console.log('err, did not click a card element');
+      return;
+    } // end if
 
+    showCard(evt);
+    console.log(evt.target.outerHTML);
+
+   });
+
+
+   // function that
+   // function lockMatching(matchingCardsArr) {
+
+   // }
 
 
   // event listeners
   restartBtn.addEventListener('click', displayCards);
+  // initialize deck
+  displayCards();
+
+  // while "game" loop
+
+  /**
+   * INITIALIZATIONS AND EVENT LISTENERS
+   */
+
+
 
 } // end of init function
 
