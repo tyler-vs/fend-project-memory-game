@@ -33,13 +33,13 @@ function init() { // MemoryGame()
     'bomb',
     'bomb'
   ];
+  var openCards = [];
+
 
 
   /**
    * FUNCTIONS
    */
-
-  console.log(myArr.length); // 8
 
   /*
    * Display the cards on the page
@@ -67,8 +67,7 @@ function init() { // MemoryGame()
 
     console.log(shuffle(myArr));
 
-    // remove cards from the deck element
-    deckEl.innerHTML = '';
+    clearCards(deckEl);
 
     for (var i = 0; i <= myArr.length - 1; i++) {
       var cardEl = document.createElement('li');
@@ -86,17 +85,57 @@ function init() { // MemoryGame()
   } // end of displayCards function
 
 
-  function showCard(evt) {
-
-    // return if target card is already showing or is already apart of a match
-    if (evt.target.classList.contains('show') || evt.target.classList.contains('match')) {
+  /**
+   * removes child nodes or "cards" from the "deck" ul element.
+   * @param  {[type]} deck [description]
+   * @return {[type]}      [description]
+   */
+  function clearCards(deck) {
+    if (!deck) {
+      console.warn('Err, these was no element to remove cards from.');
       return;
     }
 
-    evt.target.classList.add('open', 'show');
+    // remove cards from the deck element
+    deck.innerHTML = '';
   }
 
+  /**
+   * [showCard description]
+   * @param  {[type]} card [description]
+   * @return {[type]}      [description]
+   */
+  function showCard(card) {
 
+    // return if target card is already showing or is already apart of a match
+    if (card.classList.contains('show') || card.classList.contains('match')) {
+      return;
+    }
+    // add classes to card to make it open.
+    card.classList.add('open', 'show');
+  }
+
+  /**
+   * [addToOpenCards description]
+   * @param {[type]} card [description]
+   */
+  function addToOpenCards(card) {
+    // var openCards = [];
+    // check if card was passed
+    if (!card) {
+      console.log('err, there was no actual card to add to the open card list');
+      return;
+    }
+    // if the list already has another card, check to see if the two cards match
+    if (openCards.length >= 1) {
+
+    }
+
+    openCards.push(card);
+
+    console.log(openCards);
+    return;
+  }
 
 
   /*
@@ -110,16 +149,6 @@ function init() { // MemoryGame()
    *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
    */
 
-   deckEl.addEventListener('click', function(evt){
-    if (!evt.target.matches('.card')) {
-      console.log('err, did not click a card element');
-      return;
-    } // end if
-
-    showCard(evt);
-    console.log(evt.target.outerHTML);
-
-   });
 
 
    // function that
@@ -128,6 +157,11 @@ function init() { // MemoryGame()
    // }
 
 
+
+  /**
+   * INITIALIZATIONS AND EVENT LISTENERS
+   */
+
   // event listeners
   restartBtn.addEventListener('click', displayCards);
   // initialize deck
@@ -135,11 +169,26 @@ function init() { // MemoryGame()
 
   // while "game" loop
 
-  /**
-   * INITIALIZATIONS AND EVENT LISTENERS
-   */
+  deckEl.addEventListener('click', function(evt) {
+    if (!evt.target.matches('.card')) {
+      console.log('err, did not click a card element');
+      return;
+    } // end if
 
+    showCard(evt.target);
+    addToOpenCards(evt.target);
+    console.log(evt.target.outerHTML);
 
+  });
+
+  var myCards = document.querySelectorAll('.card');
+  for (var i = 0; i <= myCards.length - 1; i++) {
+    var aCard;
+    if (aCard == null) {
+      aCard = myCards[i];
+    }
+
+  }
 
 } // end of init function
 
