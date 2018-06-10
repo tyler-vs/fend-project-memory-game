@@ -173,7 +173,20 @@ function newGame() {
                 match();
                 resetGuesses();
 
+                // display modal window
+                var modalEl = document.querySelector('.modal');
+                var modalContent = document.querySelector('.modal-window__content');
+
+                modalEl.classList.add('modal--active');
+                var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
+                var pEl = document.createElement('p');
+                pEl.appendChild(document.createTextNode(modalContentText));
+                modalContent.appendChild(pEl);
+
                 setTimeout(function() {
+
+
+
                   if (confirm('Congrats, you have won the game!')) {
 
                     init();
@@ -321,7 +334,8 @@ function init() {
   // Start Game
   newGame();
 
-}; // end initTwo();
+}; // end init();
+
 
 /* =======================================================
  INITIALIZATIONS AND EVENT LISTENERS
