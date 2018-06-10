@@ -4,6 +4,7 @@
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
+* [Credits](#contributing)
 
 ## Instructions
 
@@ -18,3 +19,10 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Credits
+
+- [David Walsh Article on using `.concat()`](https://davidwalsh.name/combining-js-arrays)
+- [Adam Khoury - Memory Game Programming JavaScript Tutorial](https://www.youtube.com/watch?v=c_ohDPWmsM0)
+- [Chris Ferdinandi](https://gomakethings.com/how-i-structure-my-javascript-plugins/)
+- [Tania Rascia]()
