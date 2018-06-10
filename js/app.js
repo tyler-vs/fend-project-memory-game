@@ -70,7 +70,9 @@ function resetGuesses() {
 
   var selectedCards = document.querySelectorAll('.card.open.show');
   selectedCards.forEach(function(card) {
-    card.classList.remove('open','show');
+    // card.classList.remove('open','show','animated','flex');
+    card.classList.remove('open', 'show', 'animated','flipInY', 'shake', 'bounce');
+    // card.classList.add('flipInY');
   });
 };
 
@@ -78,7 +80,14 @@ function resetGuesses() {
 function match() {
   var selectedCards = document.querySelectorAll('.open.show');
   selectedCards.forEach(function(card) {
-    card.classList.add('match');
+    card.classList.add('match','animated','bounce');
+  });
+};
+
+function unmatch() {
+  var selectedCards = document.querySelectorAll('.open.show');
+  selectedCards.forEach(function(card) {
+    card.classList.add('animated','shake');
   });
 };
 
@@ -154,12 +163,14 @@ function newGame() {
 
         firstGuess = clickedCard;
         console.log(`first guess was ${firstGuess.firstElementChild.className}.`);
-        clickedCard.classList.add('open', 'show');
+        // clickedCard.classList.add('open', 'show');
+        clickedCard.classList.add('open','show','animated','flipInY');
 
       } else {
 
         secondGuess = clickedCard;
-        clickedCard.classList.add('open', 'show');
+        // clickedCard.classList.add('open', 'show');
+        clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
 
         if (firstGuess !== '' && secondGuess !== '') {
           if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
@@ -202,6 +213,7 @@ function newGame() {
             } // end if.. else
 
           } else {
+            setTimeout(unmatch, delay);
             setTimeout(resetGuesses, delay);
           } // end if..else
 
