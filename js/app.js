@@ -123,7 +123,7 @@ function newGame() {
     // Append card content to the new card
     newCard.appendChild(newCardContent);
 
-    console.log(newCard);
+    // console.log(newCard);
 
     newDeckEl.appendChild(newCard);
   } // end for loop
