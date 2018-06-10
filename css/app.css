@@ -111,3 +111,18 @@ h1 {
 .checked {
     color: goldenrod;
 }
+
+button,
+.button {
+    padding: 0 20px;
+    margin-bottom: .5rem;
+    line-height: 40px;
+    height: 40px;
+    font-size: .8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    background: transparent;
+    background: #fafafa;
+
+}
