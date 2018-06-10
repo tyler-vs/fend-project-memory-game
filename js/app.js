@@ -64,7 +64,6 @@ var delay = 700;
 
 function resetGuesses() {
   openCardsCount = 0;
-  userMovesCount = 0;
 
   firstGuess = '';
   secondGuess = '';
@@ -85,6 +84,7 @@ function match() {
 
 
 function newGame() {
+
   // reshuffle cards
   cards = shuffle(cardSymbols.concat(cardSymbols));
 
@@ -95,12 +95,13 @@ function newGame() {
   var movesCounterEl = document.querySelector('.moves');
   movesCounterEl.textContent = userMoveCount;
 
+  // create board
   var newDeckEl = document.createElement('ul');
   newDeckEl.classList.add('deck');
 
+  // append to container
   var containerEl = document.querySelector('.container');
 
-  // reset the deck element
   console.log('New card deck: ', cards);
 
   // display cheat table in browser js console
@@ -109,7 +110,7 @@ function newGame() {
     console.table(consoleCheatTable);
   }
 
-  // create board
+  // generate card deck DOM elements
   for (var i = 0; i < cards.length; i++) {
 
     var newCard = document.createElement('li');
@@ -135,15 +136,11 @@ function newGame() {
     var clickedCard = evt.target;
 
     // Check to make sure event is only
-    // if (card.nodeName.toUpperCase() !== 'LI') {
-    if (!clickedCard.matches('.card') || clickedCard.classList.contains('match') || clickedCard.classList.contains('open')) {
+    if (  !clickedCard.matches('.card')
+        || clickedCard.classList.contains('match')
+        || clickedCard.classList.contains('open') ) {
       return;
     }
-
-
-
-    // console.log(clickedCard.nodeName);
-    // console.log(clickedCard.innerHTML);
 
     if (openCardsCount < 2) {
 
@@ -169,24 +166,27 @@ function newGame() {
 
             totalOpenCardsCount += 2;
             console.log(`the total open cards count is at: ${totalOpenCardsCount}.`);
-            setTimeout(match, delay);
-            setTimeout(resetGuesses, delay);
 
+            // winning conditional
             if (totalOpenCardsCount === cards.length) {
               setTimeout(function() {
-                if (confirm('Congrats, you have won the game!')) {
-                  newGame();
-                } else {
-                  alert('Next time!');
-                }
+                match();
+                resetGuesses();
+
+                setTimeout(function() {
+                  if (confirm('Congrats, you have won the game!')) {
+
+                    init();
+
+                  } else {
+                    alert('Next time!');
+                  }
+                }, delay);
               }, delay);
-            }
-
-            // TODO: Modal Window
-            // …
-
-            // winning condition here?
-
+            } else {
+              setTimeout(match, delay);
+              setTimeout(resetGuesses, delay);
+            } // end if.. else
 
           } else {
             setTimeout(resetGuesses, delay);
@@ -211,6 +211,8 @@ function shuffle(array) {
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
+
+
     }
 
     return array;
@@ -293,6 +295,10 @@ function init() {
 
   // Clear console
   console.clear();
+
+  userMoveCount = 0;
+  updateStars(userMoveCount);
+
 
   // Remove deck element
   var deckEl = document.querySelector('.deck');
