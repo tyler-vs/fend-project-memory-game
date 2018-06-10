@@ -1,207 +1,39 @@
-// app.js
+/**
+ * app.js
+ * memory game application for grow with google fend scholarship.
+ * by: Tyler Van Schaick
+ * date: 2018-06-10
+ */
 
 
-// initialize function runs when the DOMContentLoaded event fires
-function init() { // MemoryGame()
+/*
+ * Create a list that holds all of your cards
+ */
 
 
-  /**
-   * VARIABLES
-   */
-
-  /*
-   * Create a list that holds all of your cards
-   */
-
-
-  var openCards = [];
-
-  var deckEl = document.querySelector('.deck');
-  var restartBtn = document.querySelector('.restart');
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
 
 
-
-  /**
-   * FUNCTIONS
-   */
-
-  /*
-   * Display the cards on the page
-   *   - shuffle the list of cards using the provided "shuffle" method below
-   *   - loop through each card and create its HTML
-   *   - add each card's HTML to the page
-   */
-
+/*
+ * set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
 
 
-
-
-
-
-
-  /**
-   * [displayCards description]
-   * @return {[type]} [description]
-   */
-  function displayCards() {
-
-    // clear out cards if any
-    clearCards(deckEl);
-
-    // loop through
-    for (var i = 0; i <= fullDeck.length - 1; i++) {
-
-      // Variables
-      var cardEl = document.createElement('li');
-      var cardIconEl = document.createElement('i');
-
-      // Add card class
-      cardEl.classList.add('card');
-
-      // Add fontawesome related class names
-      cardIconEl.classList.add('fa');
-      cardIconEl.classList.add(`fa-${fullDeck[i]}`);
-
-      // Append `i` element to the li element
-      cardEl.appendChild(cardIconEl);
-
-      // Append the card to the deck
-      deckEl.appendChild(cardEl); // <-- performance issue
-    } // end for loop
-
-  } // end of displayCards function
-
-
-  /**
-   * removes child nodes or "cards" from the "deck" ul element.
-   * @param  {[type]} deck [description]
-   * @return {[type]}      [description]
-   */
-  function clearCards(deck) {
-    if (!deck) {
-      console.warn('Err, these was no element to remove cards from.');
-      return;
-    }
-
-    // remove cards from the deck element
-    deck.innerHTML = '';
-  }
-
-  /**
-   * [showCard description]
-   * @param  {[type]} card [description]
-   * @return {[type]}      [description]
-   */
-  function showCard(card) {
-
-    // return if target card is already showing or is already apart of a match
-    if (card.classList.contains('show') || card.classList.contains('match')) {
-      return;
-    }
-    // add classes to card to make it open.
-    card.classList.add('open', 'show');
-  }
-
-  /**
-   * [addToOpenCards description]
-   * @param {[type]} card [description]
-   */
-  function addToOpenCards(card) {
-    // var openCards = [];
-    // check if card was passed
-    if (!card) {
-      console.log('err, there was no actual card to add to the open card list');
-      return;
-    }
-    // if the list already has another card, check to see if the two cards match
-    if (openCards.length >= 1) {
-
-    }
-
-    openCards.push(card);
-
-    console.log(openCards);
-    return;
-  }
-
-
-  /*
-   * set up the event listener for a card. If a card is clicked:
-   *  - display the card's symbol (put this functionality in another function that you call from this one)
-   *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-   *  - if the list already has another card, check to see if the two cards match
-   *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-   *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-   *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-   *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-   */
-
-
-
-   // function that
-   // function lockMatching(matchingCardsArr) {
-
-   // }
-
-
-
-  /**
-   * INITIALIZATIONS AND EVENT LISTENERS
-   */
-
-  // event listeners
-  restartBtn.addEventListener('click', displayCards);
-  // initialize deck
-  displayCards();
-
-  // while "game" loop
-
-  deckEl.addEventListener('click', function(evt) {
-    // check if event target is a card.
-    if (!evt.target.matches('.card')) {
-      console.log('err, did not click a card element');
-      return;
-    } // end if
-
-    // log the card
-    console.log(evt.target);
-
-    // If not cards are held in the open cards array
-    // then there is nothing to compare so add card to
-    // open cards array.
-    if (openCards.length == 0) {
-      // showCard(evt.target);
-      evt.target.classList.add('show','open');
-      // addToOpenCards(evt.target);
-      openCards.push(evt.target);
-      console.log(openCards);
-
-      var cardSymbol = evt.target.firstElementChild.nodeName;
-      // .getAttribute('class');
-      // console.log(cardSymbol);
-      // console.log(evt.target.outerHTML);
-      console.log(evt)
-    } else if (openCards.length == 1)  {
-
-      evt.target.classList.add('show','open');
-
-      if (evt.target == openCards[0]) {
-        console.log('the cards match!');
-      } else {
-
-      }
-    }
-
-
-
-
-  });
-
-} // end of init function
-
-
-// wait until the dom is loaded before starting.
-document.addEventListener('DOMContentLoaded', initTwo);
+/* =======================================================
+ VARIABLES
+ ======================================================= */
 
 /**
  * [cardSymbols description]
@@ -250,10 +82,9 @@ var userMoveCount = 0;
 
 
 
-/**
- * FUNCTIONS
- */
-
+/* =======================================================
+ FUNCTIONS
+ ======================================================= */
 
 /**
  * [newGame description]
@@ -498,14 +329,21 @@ function updateStars(total) {
 }
 
 
+/**
+ * function that initiates the entire script.
+ * @return {[type]} [description]
+ */
+function init() {
 
-function initTwo() {
-
+  // Clear console
   console.clear();
 
+  // Remove deck element
   var deckEl = document.querySelector('.deck');
   deckEl.remove();
 
+
+  // Add event lsitener to reset button.
   var restartBtn = document.querySelector('.restart');
   if (!restartBtn) {
     console.warn('Error, could not find restart button DOM element.');
@@ -514,15 +352,13 @@ function initTwo() {
     restartBtn.addEventListener('click', initTwo);
   }
 
-
-  console.log('initTwo function running.');
-
   // Start Game
   newGame();
 
-  console.log(cards.length);
+}; // end initTwo();
 
-  // Game While Loop
+/* =======================================================
+ INITIALIZATIONS AND EVENT LISTENERS
+ ======================================================= */
 
-  // End Game
-}
+document.addEventListener('DOMContentLoaded', init);
