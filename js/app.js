@@ -35,10 +35,6 @@
  VARIABLES
  ======================================================= */
 
-/**
- * [cardSymbols description]
- * @type {Array}
- */
 var cardSymbols = [
   'diamond',
   'paper-plane-o',
@@ -50,35 +46,13 @@ var cardSymbols = [
   'bomb',
 ];
 
-/**
- * [cards description]
- * @type {Array}
- */
+// var openCards = [];
 var cards = [];
-
-/**
- * [openCards description]
- * @type {Array}
- */
-var openCards = [];
-
-/**
- * [openCardsValues description]
- * @type {Array}
- */
-var openCardsValues = [];
-
-/**
- * [openCardsCount description]
- * @type {Number}
- */
 var openCardsCount = 0;
-
-/**
- * [userMoveCount description]
- * @type {Number}
- */
 var userMoveCount = 0;
+var firstGuess = '';
+var secondGuess = '';
+var delay = 700;
 
 
 
@@ -86,26 +60,40 @@ var userMoveCount = 0;
  FUNCTIONS
  ======================================================= */
 
-/**
- * [newGame description]
- * @return {[type]} [description]
- */
-function newGame() {
-  console.log('newGame(); function running.');
 
-  // RESET STATS
-  // var
+function resetGuesses() {
+  openCardsCount = 0;
+  userMovesCount = 0;
+
+  firstGuess = '';
+  secondGuess = '';
+
+  var selectedCards = document.querySelectorAll('.card.open.show');
+  selectedCards.forEach(function(card) {
+    card.classList.remove('open','show');
+  });
+};
+
+
+function match() {
+  var selectedCards = document.querySelectorAll('.open.show');
+  selectedCards.forEach(function(card) {
+    card.classList.add('match');
+  });
+};
+
+
+function newGame() {
   // reshuffle cards
   cards = shuffle(cardSymbols.concat(cardSymbols));
 
-  openCards, openCardsValues = [];
-  openCardsCount, userMoveCount = 0;
+  resetGuesses();
+
 
   // reset user moves counter
   var movesCounterEl = document.querySelector('.moves');
   movesCounterEl.textContent = userMoveCount;
 
-  // var deckEl = document.querySelector('.deck');
   var newDeckEl = document.createElement('ul');
   newDeckEl.classList.add('deck');
 
@@ -114,7 +102,7 @@ function newGame() {
   // reset the deck element
   console.log('New card deck: ', cards);
 
-  // Display cheat table in browser JS console
+  // display cheat table in browser js console
   var consoleCheatTable = cheatTable(cards);
   if (consoleCheatTable) {
     console.table(consoleCheatTable);
@@ -137,97 +125,75 @@ function newGame() {
     newDeckEl.appendChild(newCard);
   } // end for loop
 
+  containerEl.appendChild(newDeckEl);
+
 
   // Add event delegation
   newDeckEl.addEventListener('click', function(evt){
 
-
+    var clickedCard = evt.target;
 
     // Check to make sure event is only
     // if (card.nodeName.toUpperCase() !== 'LI') {
-    if (!evt.target.matches('.card') || evt.target.classList.contains('match') || evt.target.classList.contains('open')) {
+    if (!clickedCard.matches('.card') || clickedCard.classList.contains('match') || clickedCard.classList.contains('open')) {
       return;
     }
 
     userMoveCount += 1;
     movesCounterEl.textContent = userMoveCount;
     updateStarRating(userMoveCount);
-    evt.target.classList.add('open', 'show');
 
 
 
-    console.log(evt.target.nodeName);
-    console.log(evt.target.innerHTML);
+    // console.log(clickedCard.nodeName);
+    // console.log(clickedCard.innerHTML);
 
-    // if (openCardsCount != cards.length) {
-      if (openCards.length == 0) {
-        openCards.push(evt.target);
-        var cardVal = evt.target.firstElementChild.classList;
-        // if (cardVal.contains('fa')) {
-        //   cardVal.remove('fa');
-        // }
-        console.log(cardVal);
+    if (openCardsCount < 2) {
 
-        // console.log(cardVal)
-        // openCardsValues.push()
-        // openCardsCount += 2;
-      } else if (openCards.length == 1) {
+      // increment count
+      openCardsCount ++;
 
-        openCards.push(evt.target);
+      if (openCardsCount === 1) {
 
-        console.log(openCards.length);
-        console.log(openCards[0].firstElementChild);
-        console.log(openCards[1].firstElementChild);
+        firstGuess = clickedCard;
+        console.log(`first guess was ${firstGuess.firstElementChild.className}.`);
+        clickedCard.classList.add('open', 'show');
 
-        if (openCards[0].firstElementChild.className == openCards[1].firstElementChild.className) {
-          // alert('the cards match!');
-          console.log('the cards match!');
+      } else {
 
-          openCards.forEach(function(openCard) {
-            openCard.classList.add('match');
-            openCard.classList.remove('open', 'show');
-          });
+        secondGuess = clickedCard;
+        clickedCard.classList.add('open', 'show');
 
-          openCardsCount += 2;
-          openCards = [];
+        if (firstGuess !== '' && secondGuess !== '') {
+          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+            setTimeout(match, delay);
+            setTimeout(resetGuesses, delay);
+          } else {
+            setTimeout(resetGuesses, delay);
+          }
+        } // end if
+        // if (openCards[0].firstElementChild.className == openCards[1].firstElementChild.className) {
+        //   // alert('the cards match!');
+        //   console.log('the cards match!');
 
-          setTimeout(function() {
-            if (openCardsCount === cards.length && confirm('Hurray, you have won the game!\nwould you like to play again?') ) {
-              // alert('Hurray, you have won the game!');
-              initTwo();
-            }
-          }, 500);
+        //   openCards.forEach(function(openCard) {
+        //     openCard.classList.add('match');
+        //     openCard.classList.remove('open', 'show');
+        //   });
 
-        } else {
+        //   // TODO: Modal Window
+        //   // …
 
-          setTimeout(function(){
+        // } // end if
 
-            // var cardA = openCards[0];
-            // var cardB = openCards[1];
-            openCards.forEach(function(openCard) {
-              openCard.classList.remove('open', 'show');
-            });
+      } // end if.. else
 
-            openCards = [];
-
-          }, 600);
-
-        }
-      }
-    // }
+    } // end if
 
   });
-
-  // append deck to 'container' element
-  containerEl.appendChild(newDeckEl);
 };
 
 
-/**
- * Shuffle function from http://stackoverflow.com/a/2450976
- * @param  {[type]} array [description]
- * @return {[type]}       [description]
- */
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -243,11 +209,6 @@ function shuffle(array) {
 };
 
 
-/**
- * [cheatTable description]
- * @param  {[type]} cardsArr [description]
- * @return {[type]}          [description]
- */
 function cheatTable(cardsArr) {
   var tabularLog= [];
   var tempArr = [];
@@ -271,11 +232,7 @@ function cheatTable(cardsArr) {
   return tabularLog;
 }
 
-/**
- * [updateStarRating description]
- * @param  {[type]} userMovesCountNum [description]
- * @return {[type]}                   [description]
- */
+
 function updateStarRating(userMovesCountNum) {
 
   // totalCards = cards.length;
@@ -311,11 +268,6 @@ function updateStarRating(userMovesCountNum) {
 };
 
 
-/**
- * [updateStars description]
- * @param  {[type]} total [description]
- * @return {[type]}       [description]
- */
 function updateStars(total) {
   var stars = document.querySelectorAll('.fa-star');
 
@@ -329,10 +281,6 @@ function updateStars(total) {
 }
 
 
-/**
- * function that initiates the entire script.
- * @return {[type]} [description]
- */
 function init() {
 
   // Clear console
@@ -349,7 +297,7 @@ function init() {
     console.warn('Error, could not find restart button DOM element.');
     return;
   } else {
-    restartBtn.addEventListener('click', initTwo);
+    restartBtn.addEventListener('click', init);
   }
 
   // Start Game
