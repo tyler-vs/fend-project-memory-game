@@ -13,27 +13,11 @@ function init() { // MemoryGame()
    * Create a list that holds all of your cards
    */
 
+
+  var openCards = [];
+
   var deckEl = document.querySelector('.deck');
   var restartBtn = document.querySelector('.restart');
-  var myArr = [
-    'diamond',
-    'diamond',
-    'paper-plane-o',
-    'paper-plane-o',
-    'anchor',
-    'anchor',
-    'bolt',
-    'bolt',
-    'cube',
-    'cube',
-    'leaf',
-    'leaf',
-    'bicycle',
-    'bicycle',
-    'bomb',
-    'bomb'
-  ];
-  var openCards = [];
 
 
 
@@ -48,40 +32,43 @@ function init() { // MemoryGame()
    *   - add each card's HTML to the page
    */
 
+
+
+
+
+
+
+
+  /**
+   * [displayCards description]
+   * @return {[type]} [description]
+   */
   function displayCards() {
 
-    // Shuffle function from http://stackoverflow.com/a/2450976
-    function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-
-    console.log(shuffle(myArr));
-
+    // clear out cards if any
     clearCards(deckEl);
 
-    for (var i = 0; i <= myArr.length - 1; i++) {
+    // loop through
+    for (var i = 0; i <= fullDeck.length - 1; i++) {
+
+      // Variables
       var cardEl = document.createElement('li');
       var cardIconEl = document.createElement('i');
 
+      // Add card class
       cardEl.classList.add('card');
-      // cardEl.classList.add('show'); // debugging, add show card class
-      cardIconEl.classList.add('fa');
-      cardIconEl.classList.add(`fa-${myArr[i]}`);
 
+      // Add fontawesome related class names
+      cardIconEl.classList.add('fa');
+      cardIconEl.classList.add(`fa-${fullDeck[i]}`);
+
+      // Append `i` element to the li element
       cardEl.appendChild(cardIconEl);
 
-      deckEl.appendChild(cardEl);
-    }
+      // Append the card to the deck
+      deckEl.appendChild(cardEl); // <-- performance issue
+    } // end for loop
+
   } // end of displayCards function
 
 
@@ -170,28 +157,314 @@ function init() { // MemoryGame()
   // while "game" loop
 
   deckEl.addEventListener('click', function(evt) {
+    // check if event target is a card.
     if (!evt.target.matches('.card')) {
       console.log('err, did not click a card element');
       return;
     } // end if
 
-    showCard(evt.target);
-    addToOpenCards(evt.target);
-    console.log(evt.target.outerHTML);
+    // log the card
+    console.log(evt.target);
 
-  });
+    // If not cards are held in the open cards array
+    // then there is nothing to compare so add card to
+    // open cards array.
+    if (openCards.length == 0) {
+      // showCard(evt.target);
+      evt.target.classList.add('show','open');
+      // addToOpenCards(evt.target);
+      openCards.push(evt.target);
+      console.log(openCards);
 
-  var myCards = document.querySelectorAll('.card');
-  for (var i = 0; i <= myCards.length - 1; i++) {
-    var aCard;
-    if (aCard == null) {
-      aCard = myCards[i];
+      var cardSymbol = evt.target.firstElementChild.nodeName;
+      // .getAttribute('class');
+      // console.log(cardSymbol);
+      // console.log(evt.target.outerHTML);
+      console.log(evt)
+    } else if (openCards.length == 1)  {
+
+      evt.target.classList.add('show','open');
+
+      if (evt.target == openCards[0]) {
+        console.log('the cards match!');
+      } else {
+
+      }
     }
 
-  }
+
+
+
+  });
 
 } // end of init function
 
 
 // wait until the dom is loaded before starting.
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initTwo);
+
+/**
+ * [cardSymbols description]
+ * @type {Array}
+ */
+var cardSymbols = [
+  'diamond',
+  'paper-plane-o',
+  'anchor',
+  'bolt',
+  'cube',
+  'leaf',
+  'bicycle',
+  'bomb',
+];
+
+/**
+ * [cards description]
+ * @type {Array}
+ */
+var cards = [];
+
+/**
+ * [openCards description]
+ * @type {Array}
+ */
+var openCards = [];
+
+/**
+ * [openCardsValues description]
+ * @type {Array}
+ */
+var openCardsValues = [];
+
+/**
+ * [openCardsCount description]
+ * @type {Number}
+ */
+var openCardsCount = 0;
+
+/**
+ * [userMoveCount description]
+ * @type {Number}
+ */
+var userMoveCount = 0;
+
+
+
+/**
+ * FUNCTIONS
+ */
+
+
+/**
+ * [newGame description]
+ * @return {[type]} [description]
+ */
+function newGame() {
+  console.log('newGame(); function running.');
+
+  // RESET STATS
+  // var
+  // reshuffle cards
+  cards = shuffle(cardSymbols.concat(cardSymbols));
+
+  openCards, openCardsValues = [];
+  openCardsCount, userMoveCount = 0;
+
+  // reset user moves counter
+  var movesCounterEl = document.querySelector('.moves');
+  movesCounterEl.textContent = userMoveCount;
+
+  // var deckEl = document.querySelector('.deck');
+  var newDeckEl = document.createElement('ul');
+  newDeckEl.classList.add('deck');
+
+  var containerEl = document.querySelector('.container');
+
+  // reset the deck element
+  console.log('New card deck: ', cards);
+
+  // Display cheat table in browser JS console
+  var consoleCheatTable = cheatTable(cards);
+  if (consoleCheatTable) {
+    console.table(consoleCheatTable);
+  }
+
+  // create board
+  for (var i = 0; i < cards.length; i++) {
+
+    var newCard = document.createElement('li');
+    var newCardContent = document.createElement('i');
+
+    newCardContent.classList.add('fa',`fa-${cards[i]}`);
+    newCard.classList.add('card');
+
+    // Append card content to the new card
+    newCard.appendChild(newCardContent);
+
+    console.log(newCard);
+
+    newDeckEl.appendChild(newCard);
+  } // end for loop
+
+
+  // Add event delegation
+  newDeckEl.addEventListener('click', function(evt){
+
+
+
+    // Check to make sure event is only
+    // if (card.nodeName.toUpperCase() !== 'LI') {
+    if (!evt.target.matches('.card') || evt.target.classList.contains('match')) {
+      return;
+    }
+
+    userMoveCount += 1;
+    movesCounterEl.textContent = userMoveCount;
+    evt.target.classList.add('open', 'show');
+
+
+
+    console.log(evt.target.nodeName);
+    console.log(evt.target.innerHTML);
+
+    // if (openCardsCount != cards.length) {
+      if (openCards.length == 0) {
+        openCards.push(evt.target);
+        var cardVal = evt.target.firstElementChild.classList;
+        // if (cardVal.contains('fa')) {
+        //   cardVal.remove('fa');
+        // }
+        console.log(cardVal);
+
+        // console.log(cardVal)
+        // openCardsValues.push()
+        // openCardsCount += 2;
+      } else if (openCards.length == 1) {
+
+        openCards.push(evt.target);
+
+        console.log(openCards.length);
+        console.log(openCards[0].firstElementChild);
+        console.log(openCards[1].firstElementChild);
+
+        if (openCards[0].firstElementChild.className == openCards[1].firstElementChild.className) {
+          // alert('the cards match!');
+          console.log('the cards match!');
+
+          openCards.forEach(function(openCard) {
+            openCard.classList.add('match');
+            openCard.classList.remove('open', 'show');
+          });
+
+          openCardsCount += 2;
+          openCards = [];
+
+          setTimeout(function() {
+            if (openCardsCount === cards.length && confirm('Hurray, you have won the game!\nwould you like to play again?') ) {
+              // alert('Hurray, you have won the game!');
+              initTwo();
+            }
+          }, 500);
+
+        } else {
+
+          setTimeout(function(){
+
+            // var cardA = openCards[0];
+            // var cardB = openCards[1];
+            openCards.forEach(function(openCard) {
+              openCard.classList.remove('open', 'show');
+            });
+
+            openCards = [];
+
+          }, 600);
+
+        }
+      }
+    // }
+
+  });
+
+  // append deck to 'container' element
+  containerEl.appendChild(newDeckEl);
+};
+
+
+/**
+ * Shuffle function from http://stackoverflow.com/a/2450976
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+};
+
+
+/**
+ * [cheatTable description]
+ * @param  {[type]} cardsArr [description]
+ * @return {[type]}          [description]
+ */
+function cheatTable(cardsArr) {
+  var tabularLog= [];
+  var tempArr = [];
+  var tempCount;
+  var cards = cardsArr;
+
+  var cardsTable = cards.forEach(function(card, ind) {
+
+    tempCount = ind + 1;
+
+    if ( (tempCount % 4) === 0 ) {
+      tempArr.push(card);
+      tabularLog.push(tempArr);
+      tempArr = [];
+    } else {
+      tempArr.push(card);
+    }
+
+  });
+
+  return tabularLog;
+}
+
+
+
+function initTwo() {
+
+  console.clear();
+
+  var deckEl = document.querySelector('.deck');
+  deckEl.remove();
+
+  var restartBtn = document.querySelector('.restart');
+  if (!restartBtn) {
+    console.warn('Error, could not find restart button DOM element.');
+    return;
+  } else {
+    restartBtn.addEventListener('click', initTwo);
+  }
+
+
+  console.log('initTwo function running.');
+
+  // Start Game
+  newGame();
+
+  console.log(cards.length);
+
+  // Game While Loop
+
+  // End Game
+}
