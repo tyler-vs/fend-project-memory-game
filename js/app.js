@@ -304,6 +304,10 @@ function init() {
   var deckEl = document.querySelector('.deck');
   deckEl.remove();
 
+  // Hide the modal element
+  var modal = document.querySelector('.modal');
+  modal.classList.remove('modal--active');
+
 
   // Add event lsitener to reset button.
   var restartBtn = document.querySelector('.restart');
