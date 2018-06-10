@@ -49,6 +49,7 @@ var cardSymbols = [
 // var openCards = [];
 var cards = [];
 var openCardsCount = 0;
+var totalOpenCardsCount = 0;
 var userMoveCount = 0;
 var firstGuess = '';
 var secondGuess = '';
@@ -64,6 +65,7 @@ var delay = 700;
 function resetGuesses() {
   openCardsCount = 0;
   userMovesCount = 0;
+  totalOpenCardsCount = 0;
 
   firstGuess = '';
   secondGuess = '';
@@ -77,6 +79,7 @@ function resetGuesses() {
 
 function match() {
   var selectedCards = document.querySelectorAll('.open.show');
+  totalOpenCardsCount += 2;
   selectedCards.forEach(function(card) {
     card.classList.add('match');
   });
@@ -139,9 +142,9 @@ function newGame() {
       return;
     }
 
-    userMoveCount += 1;
-    movesCounterEl.textContent = userMoveCount;
-    updateStarRating(userMoveCount);
+
+
+    // updateStarRating(userMoveCount);
 
 
 
@@ -152,6 +155,8 @@ function newGame() {
 
       // increment count
       openCardsCount ++;
+      userMoveCount ++;
+      movesCounterEl.textContent = userMoveCount;
 
       if (openCardsCount === 1) {
 
@@ -168,23 +173,18 @@ function newGame() {
           if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
             setTimeout(match, delay);
             setTimeout(resetGuesses, delay);
+
+            if (totalOpenCardsCount === cards.length) {
+              alert('Congrats, you have won the game!');
+            }
+            // TODO: Modal Window
+            // …
+
           } else {
             setTimeout(resetGuesses, delay);
-          }
+          } // end if..else
+
         } // end if
-        // if (openCards[0].firstElementChild.className == openCards[1].firstElementChild.className) {
-        //   // alert('the cards match!');
-        //   console.log('the cards match!');
-
-        //   openCards.forEach(function(openCard) {
-        //     openCard.classList.add('match');
-        //     openCard.classList.remove('open', 'show');
-        //   });
-
-        //   // TODO: Modal Window
-        //   // …
-
-        // } // end if
 
       } // end if.. else
 
