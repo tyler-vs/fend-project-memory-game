@@ -314,12 +314,13 @@ function newGame() {
 
     // Check to make sure event is only
     // if (card.nodeName.toUpperCase() !== 'LI') {
-    if (!evt.target.matches('.card') || evt.target.classList.contains('match')) {
+    if (!evt.target.matches('.card') || evt.target.classList.contains('match') || evt.target.classList.contains('open')) {
       return;
     }
 
     userMoveCount += 1;
     movesCounterEl.textContent = userMoveCount;
+    updateStarRating(userMoveCount);
     evt.target.classList.add('open', 'show');
 
 
@@ -437,6 +438,63 @@ function cheatTable(cardsArr) {
   });
 
   return tabularLog;
+}
+
+/**
+ * [updateStarRating description]
+ * @param  {[type]} userMovesCountNum [description]
+ * @return {[type]}                   [description]
+ */
+function updateStarRating(userMovesCountNum) {
+
+  // totalCards = cards.length;
+  // var ratingSystem {
+  //   'Good': {
+  //     stars: 1,
+  //     minMoves: 30,
+  //   },
+  //   'Great': {
+  //     stars: 2,
+  //     minMoves: 24,
+  //   },
+  //   'Perfect': {
+  //     stars: 3,
+  //     minMoves: 20,
+  //   },
+  // };
+
+  if (!userMovesCountNum) {
+    console.warn('Error, no user moves counter number.');
+    return;
+  }
+
+  if (userMovesCountNum <= 20) {
+    updateStars(3);
+  } else if (userMovesCountNum <= 24) {
+    updateStars(2);
+  } else if (userMovesCountNum <=  30) {
+    updateStars(1);
+  } else {
+    updateStars(0);
+  }
+};
+
+
+/**
+ * [updateStars description]
+ * @param  {[type]} total [description]
+ * @return {[type]}       [description]
+ */
+function updateStars(total) {
+  var stars = document.querySelectorAll('.fa-star');
+
+  stars.forEach(function(star, index) {
+    if (index < total) {
+      star.classList.add('checked');
+    } else {
+      star.classList.remove('checked');
+    }
+  });
 }
 
 
