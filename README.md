@@ -1,4 +1,4 @@
-# Memory Game Project
+# [Memory Game Project](https://github.com/tyler-vs/fend-project-memory-game/tree/v1.0)
 
 ## Table of Contents
 
@@ -26,3 +26,4 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 - [Adam Khoury - Memory Game Programming JavaScript Tutorial](https://www.youtube.com/watch?v=c_ohDPWmsM0)
 - [Chris Ferdinandi](https://gomakethings.com/how-i-structure-my-javascript-plugins/)
 - [Tania Rascia]()
+- [Animate.css](https://daneden.github.io/animate.css/)
