@@ -65,7 +65,6 @@ var delay = 700;
 function resetGuesses() {
   openCardsCount = 0;
   userMovesCount = 0;
-  totalOpenCardsCount = 0;
 
   firstGuess = '';
   secondGuess = '';
@@ -79,7 +78,6 @@ function resetGuesses() {
 
 function match() {
   var selectedCards = document.querySelectorAll('.open.show');
-  totalOpenCardsCount += 2;
   selectedCards.forEach(function(card) {
     card.classList.add('match');
   });
@@ -91,7 +89,7 @@ function newGame() {
   cards = shuffle(cardSymbols.concat(cardSymbols));
 
   resetGuesses();
-
+  totalOpenCardsCount = 0;
 
   // reset user moves counter
   var movesCounterEl = document.querySelector('.moves');
@@ -144,10 +142,6 @@ function newGame() {
 
 
 
-    // updateStarRating(userMoveCount);
-
-
-
     // console.log(clickedCard.nodeName);
     // console.log(clickedCard.innerHTML);
 
@@ -156,6 +150,7 @@ function newGame() {
       // increment count
       openCardsCount ++;
       userMoveCount ++;
+      updateStarRating(userMoveCount);
       movesCounterEl.textContent = userMoveCount;
 
       if (openCardsCount === 1) {
@@ -171,14 +166,27 @@ function newGame() {
 
         if (firstGuess !== '' && secondGuess !== '') {
           if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+
+            totalOpenCardsCount += 2;
+            console.log(`the total open cards count is at: ${totalOpenCardsCount}.`);
             setTimeout(match, delay);
             setTimeout(resetGuesses, delay);
 
             if (totalOpenCardsCount === cards.length) {
-              alert('Congrats, you have won the game!');
+              setTimeout(function() {
+                if (confirm('Congrats, you have won the game!')) {
+                  newGame();
+                } else {
+                  alert('Next time!');
+                }
+              }, delay);
             }
+
             // TODO: Modal Window
             // …
+
+            // winning condition here?
+
 
           } else {
             setTimeout(resetGuesses, delay);
