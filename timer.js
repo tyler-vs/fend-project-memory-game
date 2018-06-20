@@ -61,7 +61,6 @@ var StopWatch = function(parentElement, options) {
     // timerRunning = false;
     timer = [0,0,0,0];
     timerEl.innerHTML = '00:0E:ND';
-    // render('00:00:00'); // old render function
   }
 
   function update() {
@@ -70,7 +69,6 @@ var StopWatch = function(parentElement, options) {
     let currentTime = leadingZero(timer[0]) + ":" + leadingZero(timer[1]) + ":" + leadingZero(timer[2]);
 
     // render
-    // render(currentTime); // old function
     timerEl.innerHTML = currentTime;
 
     // update
@@ -83,13 +81,6 @@ var StopWatch = function(parentElement, options) {
     timer[2] = Math.floor(timer[3] - (timer[1] * 100) - (timer[0] * 6000));
 
   }
-
-  // function render(currentTime) {
-  // function render() {
-  // // function render() {
-  //   timerEl.innerHTML = time; // clock
-  //   // timerEl.innerHTML = timer; // clock
-  // }
 
   // function delta() {} // dep
 
