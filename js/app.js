@@ -302,15 +302,25 @@ function updateStarRating(userMovesCountNum) {
     return;
   }
 
-  if (userMovesCountNum <= 20) {
-    updateStars(3);
-  } else if (userMovesCountNum <= 24) {
-    updateStars(2);
-  } else if (userMovesCountNum <=  30) {
-    updateStars(1);
-  } else {
-    updateStars(0);
+  switch (true) {
+    case userMovesCountNum <= 20:
+      updateStars(3);
+      // statements_1
+      break;
+    case userMovesCountNum <= 24:
+      updateStars(2);
+      // statements_1
+      break;
+    case userMovesCountNum <= 30:
+      updateStars(1);
+      // statements_1
+      break;
+    default:
+      // statements_def
+      updateStars(0);
+      break;
   }
+
 };
 
 
