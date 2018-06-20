@@ -22,8 +22,12 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Credits
 
-- [David Walsh Article on using `.concat()`](https://davidwalsh.name/combining-js-arrays)
-- [Adam Khoury - Memory Game Programming JavaScript Tutorial](https://www.youtube.com/watch?v=c_ohDPWmsM0)
-- [Chris Ferdinandi](https://gomakethings.com/how-i-structure-my-javascript-plugins/)
-- [Tania Rascia]()
-- [Animate.css](https://daneden.github.io/animate.css/)
+- [david walsh article on using `.concat()`](https://davidwalsh.name/combining-js-arrays)
+- [adam khoury - memory game programming javascript tutorial](https://www.youtube.com/watch?v=c_ohdpwmsm0)
+- [chris ferdinandi](https://gomakethings.com/how-i-structure-my-javascript-plugins/)
+- [tania rascia]()
+- [animate.css](https://daneden.github.io/animate.css/)
+- [mort10](https://github.com/mor10)
+- [stackover user](https://stackoverflow.com/questions/20318822/how-to-create-a-stopwatch-using-javascript)
+- [follow up answer on so](https://stackoverflow.com/a/42204522/7221168)
+- [`settimeout` javasctipt.info docs](https://javascript.info/settimeout-setinterval)
