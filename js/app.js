@@ -54,6 +54,7 @@ var userMoveCount = 0;
 var firstGuess = '';
 var secondGuess = '';
 var delay = 700;
+var appStopwatch;
 
 
 
@@ -151,6 +152,13 @@ function newGame() {
       return;
     }
 
+    if (userMoveCount === 0) {
+      // new timer
+      var parEl = document.querySelector('.score-panel');
+      appStopwatch = new StopWatch(parEl);
+      appStopwatch.start();
+    }
+
     if (openCardsCount < 2) {
 
       // increment count
@@ -180,9 +188,12 @@ function newGame() {
 
             // winning conditional
             if (totalOpenCardsCount === cards.length) {
+              appStopwatch.stop();
+
               setTimeout(function() {
                 match();
                 resetGuesses();
+                appStopwatch.reset();
 
                 // display modal window
                 var modalEl = document.querySelector('.modal');
