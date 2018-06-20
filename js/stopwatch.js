@@ -2,6 +2,7 @@
  * StopWatch Script
  * Adapted From: mor10
  * https://stackoverflow.com/a/20319035/7221168
+ * http://jsbin.com/IgaXEVI/167/edit?js
  */
 
 var StopWatch = function(parentElement, options) {
