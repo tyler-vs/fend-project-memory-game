@@ -14,7 +14,6 @@ var StopWatch = function(parentElement, options) {
   // ---------
   var timerEl = createTimerEl();
   var interval;
-  // var timerRunning = false;
   var timer = [0,0,0,0];
 
   // default options
@@ -42,14 +41,12 @@ var StopWatch = function(parentElement, options) {
 
   function start() {
     if (!interval) {
-      // timerRunning = true;
       interval = setInterval(update, 10);
     }
   }
 
   function stop() {
     if (interval) {
-      // timerRunning = false;
       clearInterval(interval);
       interval = null;
     }
@@ -57,8 +54,6 @@ var StopWatch = function(parentElement, options) {
 
   function reset() {
     clearInterval(interval);
-    // clock = 0;
-    // timerRunning = false;
     timer = [0,0,0,0];
     timerEl.innerHTML = '00:0E:ND';
   }
@@ -82,10 +77,6 @@ var StopWatch = function(parentElement, options) {
 
   }
 
-  // function delta() {} // dep
-
-  // function timeFormat() {} // dep
-
 
   // public functions/methods
   // ------------------------
@@ -99,21 +90,3 @@ var StopWatch = function(parentElement, options) {
 
   reset();
 };
-
-// // .stats
-
-// var statsEl = document.getElementsByClassName('stats')[0];
-// if (!statsEl) {
-//   console.log('err, no stats');
-// }
-
-// var statsTimer = new StopWatch(statsEl);
-
-// setTimeout(function(){
-//   statsTimer.start()
-//   setTimeout(function() {
-//     statsTimer.stop()
-//   }, 5000);
-// }, 500);
-// // statsTimer.reset();
-
