@@ -187,3 +187,11 @@ button,
 .modal-button--exit .fa {
     color: red;
 }
+
+
+/* add flexbox styles to space out "score-panel" values*/
+.score-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
