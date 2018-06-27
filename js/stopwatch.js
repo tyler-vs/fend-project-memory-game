@@ -78,6 +78,10 @@ var StopWatch = function(parentElement, options) {
 
   }
 
+  function destroy() {
+    timerEl.remove();
+  }
+
 
   // public functions/methods
   // ------------------------
@@ -85,6 +89,7 @@ var StopWatch = function(parentElement, options) {
   this.start = start;
   this.stop = stop;
   this.reset = reset;
+  this.destroy = destroy;
 
   // inits/evt listeners
   // -------------------
