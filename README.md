@@ -35,6 +35,11 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 - [stackover user](https://stackoverflow.com/questions/20318822/how-to-create-a-stopwatch-using-javascript)
 - [follow up answer on so](https://stackoverflow.com/a/42204522/7221168)
 - [`settimeout` javasctipt.info docs](https://javascript.info/settimeout-setinterval)
+- Modal Window
+    + [W3Schools Modal Example](https://www.w3schools.com/howto/howto_css_modals.asp)
+    + [Supercharged Side Bar Nav Episode from YouTube](https://www.youtube.com/watch?v=e5CXg1sjTqQ)
+        * [Paul Lewis](https://developers.google.com/web/resources/contributors/#paullewis)
+        * [Surma](https://developers.google.com/web/resources/contributors/#surma)
 
 
 ## Project extensions
