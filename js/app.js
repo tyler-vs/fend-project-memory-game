@@ -153,9 +153,6 @@ function newGame() {
     }
 
     if (userMoveCount === 0) {
-      // new timer
-      var parEl = document.querySelector('.score-panel');
-      appStopwatch = new StopWatch(parEl);
       appStopwatch.start();
     }
 
@@ -210,7 +207,7 @@ function newGame() {
 
 
                   if (confirm('Congrats, you have won the game!')) {
-
+                    appStopwatch.destroy();
                     init();
 
                   } else {
@@ -344,7 +341,14 @@ function init() {
 
   userMoveCount = 0;
   updateStars(userMoveCount);
+  // new timer
+  var parEl = document.querySelector('.score-panel');
+  appStopwatch = new StopWatch(parEl);
 
+  // if (appStopwatch !== undefined || appStopwatch !== null) {
+  // } else {
+
+  // }
 
   // Remove deck element
   var deckEl = document.querySelector('.deck');
@@ -361,7 +365,12 @@ function init() {
     console.warn('Error, could not find restart button DOM element.');
     return;
   } else {
-    restartBtn.addEventListener('click', init);
+    restartBtn.addEventListener('click', function() {
+      // app
+      appStopwatch.destroy();
+      // appStopwatch.destroy();
+      init();
+    });
   }
 
   // Start Game
