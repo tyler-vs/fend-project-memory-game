@@ -55,7 +55,7 @@ var firstGuess = '';
 var secondGuess = '';
 var delay = 700;
 var appStopwatch;
-
+var modal;
 
 
 /* =======================================================
@@ -193,14 +193,17 @@ function newGame() {
                 appStopwatch.reset();
 
                 // display modal window
-                var modalEl = document.querySelector('.modal');
-                var modalContent = document.querySelector('.modal-window__content');
+                // var modalEl = document.querySelector('.modal');
+                // var modalContent = document.querySelector('.modal-window__content');
 
-                modalEl.classList.add('modal--active');
+                // modalEl.classList.add('modal--active');
                 var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
-                var pEl = document.createElement('p');
-                pEl.appendChild(document.createTextNode(modalContentText));
-                modalContent.appendChild(pEl);
+
+                modal.updateModalContent(modalContentText);
+                // var pEl = document.createElement('p');
+                // pEl.appendChild(document.createTextNode(modalContentText));
+                // modalContent.appendChild(pEl);
+                modal.showModal();
 
                 setTimeout(function() {
 
@@ -208,9 +211,11 @@ function newGame() {
 
                   if (confirm('Congrats, you have won the game!')) {
                     appStopwatch.destroy();
+                    modal.hideModal();
                     init();
 
                   } else {
+                    modal.hideModal();
                     alert('Next time!');
                   }
                 }, delay);
@@ -354,9 +359,17 @@ function init() {
   var deckEl = document.querySelector('.deck');
   deckEl.remove();
 
+
+  // var myModal = new Modal();
   // Hide the modal element
-  var modal = document.querySelector('.modal');
-  modal.classList.remove('modal--active');
+  // var modal = document.querySelector('.modal');
+  var getModal = document.querySelector('modal');
+  if (getModal) {
+    getModal.remove();
+    getModal = null;
+  }
+  modal = new Modal();
+  // modal.classList.remove('modal--active');
 
 
   // Add event lsitener to reset button.
