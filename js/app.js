@@ -190,7 +190,7 @@ function newGame() {
               setTimeout(function() {
                 match();
                 resetGuesses();
-                appStopwatch.reset();
+                // appStopwatch.reset();
 
                 // display modal window
                 // var modalEl = document.querySelector('.modal');
