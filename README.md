@@ -35,3 +35,10 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 - [stackover user](https://stackoverflow.com/questions/20318822/how-to-create-a-stopwatch-using-javascript)
 - [follow up answer on so](https://stackoverflow.com/a/42204522/7221168)
 - [`settimeout` javasctipt.info docs](https://javascript.info/settimeout-setinterval)
+
+
+## Project extensions
+
+- [x] Add CSS animations when cards are clicked, unsuccessfully matched, and successfully matched.
+- [] Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
+- [] Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
