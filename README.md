@@ -45,5 +45,5 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Project extensions
 
 - [x] Add CSS animations when cards are clicked, unsuccessfully matched, and successfully matched.
-- [] Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
-- [] Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
+- [ ] Add unique functionality beyond the minimum requirements (Implement a leaderboard, store game state using local storage, etc.)
+- [ ] Implement additional optimizations that improve the performance and user experience of the game (keyboard shortcuts for gameplay, etc).
