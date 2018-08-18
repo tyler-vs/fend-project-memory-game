@@ -37,7 +37,9 @@ var MemoryGameApp = (function() {
   var delay = 700;
   var appStopwatch;
   var modal;
+
   var publicAPIs = {};
+  var settings = {};
 
 
   //
@@ -51,6 +53,8 @@ var MemoryGameApp = (function() {
   // unmatch
 
   // shuffle (helper)
+
+  // reshuffle (helper)
 
   // update star rating system
 
@@ -68,8 +72,37 @@ var MemoryGameApp = (function() {
   //
 
   // init
+  publicAPIs.init = function() {
+
+    // run publicAPI.destroy()
+
+    // feature test
+
+    // merge user options
+
+    // add event listeners
+
+    // run gameStart
+
+  }
 
   // destroy
+  publicAPIs.destroy = function() {
+
+    // only run is settings is set
+    if(!settings) {
+      return;
+    }
+
+    // remove event listeners
+
+    // remove plugin code
+
+    // remove initializaions CSS class attributes
+
+    // remove settings
+
+  }
 
   // ??reset??
 
@@ -78,7 +111,10 @@ var MemoryGameApp = (function() {
   // inits/event listeners
   //
 
+
   // return public APIs
+
+  return publicAPIs;
 
 
 })();
