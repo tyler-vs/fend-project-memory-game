@@ -13,28 +13,73 @@
 
 var MemoryGameApp = (function() {
 
-'use strict';
+  'use strict';
 
-//
-// variables
-//
+  //
+  // variables
+  //
+  var cardSymbols = [
+    'diamond',
+    'paper-plane-o',
+    'anchor',
+    'bolt',
+    'cube',
+    'leaf',
+    'bicycle',
+    'bomb',
+  ];
+  var cards = [];
+  var openCardsCount = 0;
+  var totalOpenCardsCount = 0;
+  var userMoveCount = 0;
+  var firstGuess = '';
+  var secondGuess = '';
+  var delay = 700;
+  var appStopwatch;
+  var modal;
+  var publicAPIs = {};
+
+
+  //
+  // private functions
+  //
+
+  // reset guesses
+
+  // match
+
+  // unmatch
+
+  // shuffle (helper)
+
+  // update star rating system
+
+  // update stars
 
 
 
 
-//
-// private functions
-//
 
 
-//
-// public functions
-//
 
 
-//
-// inits/event listeners
-//
+  //
+  // public functions
+  //
+
+  // init
+
+  // destroy
+
+  // ??reset??
+
+
+  //
+  // inits/event listeners
+  //
+
+  // return public APIs
+
 
 })();
 

@@ -64,11 +64,12 @@ var modal;
 
 
 function resetGuesses() {
+  // Reset variables back
   openCardsCount = 0;
-
   firstGuess = '';
   secondGuess = '';
 
+  //
   var selectedCards = document.querySelectorAll('.card.open.show');
   selectedCards.forEach(function(card) {
     // card.classList.remove('open','show','animated','flex');
@@ -257,6 +258,7 @@ function shuffle(array) {
 };
 
 
+// TODO: Re/move this function.
 function cheatTable(cardsArr) {
   var tabularLog= [];
   var tempArr = [];
