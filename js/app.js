@@ -247,13 +247,10 @@ var MemoryGameApp = (function() {
           temporaryValue = array[currentIndex];
           array[currentIndex] = array[randomIndex];
           array[randomIndex] = temporaryValue;
-
-
       }
 
       return array;
   };
-
 
   // TODO: Re/move this function.
   function cheatTable(cardsArr) {
@@ -343,16 +340,13 @@ var MemoryGameApp = (function() {
     // Clear console
     console.clear();
 
+    // Reset user counts
     userMoveCount = 0;
     updateStars(userMoveCount);
-    // new timer
+
+    // Get panel element for new timer
     var parEl = document.querySelector('.score-panel');
     appStopwatch = new StopWatch(parEl);
-
-    // if (appStopwatch !== undefined || appStopwatch !== null) {
-    // } else {
-
-    // }
 
     // Remove deck element
     var deckEl = document.querySelector('.deck');
@@ -371,20 +365,6 @@ var MemoryGameApp = (function() {
     // modal.classList.remove('modal--active');
 
 
-    // Add event lsitener to reset button.
-    var restartBtn = document.querySelector('.restart');
-    if (!restartBtn) {
-      console.warn('Error, could not find restart button DOM element.');
-      return;
-    } else {
-      restartBtn.addEventListener('click', function() {
-        // app
-        appStopwatch.destroy();
-        // appStopwatch.destroy();
-        init();
-      });
-    }
-
     // Start Game
     newGame();
 
@@ -398,10 +378,32 @@ var MemoryGameApp = (function() {
 
   publicAPIs.init = function() {
 
-    // feature tests
+    // TODO: Add feature tests here
+    // …
 
-    // add event listeners
-    document.addEventListener('DOMContentLoaded', init);
+    // Add event listeners
+
+    // document.addEventListener('DOMContentLoaded', init);
+    init();
+    document.addEventListener('click', function(event) {
+
+      // if (event.target.matches(settings.selectorResetButton))
+      // if (event.target.matches('.restart')) {
+      if (event.target.closest('.restart')) {
+        // reset:
+        // - gameboard
+        // - timer
+        // - stars
+        // alert('game restarted');
+
+        // app
+        appStopwatch.destroy();
+        // appStopwatch.destroy();
+        init();
+      }
+
+    });
+
 
   }
 
