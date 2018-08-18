@@ -37,7 +37,12 @@ var MemoryGameApp = (function() {
   var delay = 700;
   var appStopwatch;
   var modal;
+
+  // Public APIs Object
   var publicAPIs = {};
+
+  // User configurable settings
+  var settings = {};
 
 
 
@@ -55,11 +60,11 @@ var MemoryGameApp = (function() {
 
     // Get selected cards
     var selectedCards = document.querySelectorAll('.card.open.show');
+
     selectedCards.forEach(function(card) {
       card.classList.remove('open', 'show', 'animated','flipInY', 'shake', 'bounce');
     });
   };
-
 
   function match() {
     var selectedCards = document.querySelectorAll('.open.show');
