@@ -134,3 +134,8 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.score-panel > * {
+  flex-basis: 90px;
+  text-align: center;
+}
