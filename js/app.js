@@ -80,11 +80,18 @@ var MemoryGameApp = (function() {
     });
   };
 
+  function reshuffleCards(cardSymbolsdArr) {
+    if (!cardSymbolsdArr) {
+      return;
+    }
+
+    return shuffle(cardSymbolsdArr.concat(cardSymbolsdArr));
+  };
 
   function newGame() {
 
-    // reshuffle cards
-    cards = shuffle(cardSymbols.concat(cardSymbols));
+    // Reshuffle cards
+    cards = reshuffleCards(cardSymbols);
 
     resetGuesses();
     totalOpenCardsCount = 0;
