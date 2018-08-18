@@ -90,10 +90,13 @@ var MemoryGameApp = (function() {
 
   function newGame() {
 
+    // Reset things
+
     // Reshuffle cards
     cards = reshuffleCards(cardSymbols);
 
     resetGuesses();
+
     totalOpenCardsCount = 0;
 
     // reset user moves counter
@@ -385,14 +388,23 @@ var MemoryGameApp = (function() {
     // Start Game
     newGame();
 
-  }; // end init();
+  };
 
 
   /* =======================================================
    INITIALIZATIONS AND EVENT LISTENERS
    ======================================================= */
 
-  document.addEventListener('DOMContentLoaded', init);
+
+  publicAPIs.init = function() {
+
+    // feature tests
+
+    // add event listeners
+    document.addEventListener('DOMContentLoaded', init);
+
+  }
+
 
 
   // return public apis
