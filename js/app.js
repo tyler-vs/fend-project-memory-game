@@ -237,7 +237,6 @@ var MemoryGameApp = (function() {
     });
   };
 
-
   function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -341,8 +340,8 @@ var MemoryGameApp = (function() {
     console.clear();
 
     // Reset user counts
-    userMoveCount = 0;
-    updateStars(userMoveCount);
+    // userMoveCount = 0;
+
 
     // Get panel element for new timer
     var parEl = document.querySelector('.score-panel');
@@ -385,21 +384,25 @@ var MemoryGameApp = (function() {
 
     // document.addEventListener('DOMContentLoaded', init);
     init();
+
     document.addEventListener('click', function(event) {
 
-      // if (event.target.matches(settings.selectorResetButton))
-      // if (event.target.matches('.restart')) {
+      // Restart evt handler
       if (event.target.closest('.restart')) {
-        // reset:
-        // - gameboard
-        // - timer
-        // - stars
-        // alert('game restarted');
 
-        // app
+        // custom
+        // Reset user counts
+        userMoveCount = 0;
+
+        // Reset the following:
+
+        // - timer
         appStopwatch.destroy();
-        // appStopwatch.destroy();
-        init();
+        // - stars
+        updateStars(userMoveCount);
+        // - gameboard
+        init(); // should come last
+
       }
 
     });

@@ -61,6 +61,7 @@ var MemoryGameApp = (function() {
   // update stars
 
 
+  /*proposed private methods*/
 
 
 
