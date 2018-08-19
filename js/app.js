@@ -38,8 +38,8 @@ var MemoryGameApp = (function() {
   var previousTarget = null;
   var delay = 1200;
 
-  var appStopwatch;
-  var modal;
+  // var appStopwatch;
+  // var modal;
 
   // Public APIs Object
   var publicAPIs = {};
@@ -54,7 +54,6 @@ var MemoryGameApp = (function() {
    ======================================================= */
 
   function resetGuesses() {
-    // Reset variables back
     openCardsCount = 0;
     firstGuess = '';
     secondGuess = '';
@@ -151,9 +150,9 @@ var MemoryGameApp = (function() {
         return;
       }
 
-      if (userMoveCount === 0) {
-        appStopwatch.start();
-      }
+      // if (userMoveCount === 0) {
+      //   appStopwatch.start();
+      // }
 
       if (openCardsCount < 2) {
 
@@ -184,7 +183,7 @@ var MemoryGameApp = (function() {
 
               // winning conditional
               if (totalOpenCardsCount === cards.length) {
-                appStopwatch.stop();
+                // appStopwatch.stop();
 
                 setTimeout(function() {
                   match();
@@ -196,25 +195,28 @@ var MemoryGameApp = (function() {
                   // var modalContent = document.querySelector('.modal-window__content');
 
                   // modalEl.classList.add('modal--active');
-                  var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
+                  // var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
 
-                  modal.updateModalContent(modalContentText);
+                  // modal.updateModalContent(modalContentText);
                   // var pEl = document.createElement('p');
                   // pEl.appendChild(document.createTextNode(modalContentText));
                   // modalContent.appendChild(pEl);
-                  modal.showModal();
+                  // modal.showModal();
 
                   setTimeout(function() {
 
 
 
                     if (confirm('Congrats, you have won the game!')) {
-                      appStopwatch.destroy();
-                      modal.hideModal();
-                      init();
+                      // appStopwatch.destroy();
+                      // modal.hideModal();
+                      // init();
+                      alert('alright, lets play again!');
+
+                      resetBoard();
 
                     } else {
-                      modal.hideModal();
+                      // modal.hideModal();
                       alert('Next time!');
                     }
                   }, delay);
@@ -323,53 +325,58 @@ var MemoryGameApp = (function() {
   }
 
 
-  function init() {
+  // function init() {
 
-    // Clear console
-    console.clear();
+  //   // Clear console
 
-    // Reset user counts
-    // userMoveCount = 0;
-
-
-    // Get panel element for new timer
-    var parEl = document.querySelector('.score-panel');
-    appStopwatch = new StopWatch(parEl);
-
-    // Remove deck element
-    var deckEl = document.querySelector('.deck');
-    deckEl.remove();
+  //   // Reset user counts
+  //   // userMoveCount = 0;
 
 
-    // var myModal = new Modal();
-    // Hide the modal element
-    // var modal = document.querySelector('.modal');
-    var getModal = document.querySelector('modal');
-    if (getModal) {
-      getModal.remove();
-      getModal = null;
-    }
-    modal = new Modal();
-    // modal.classList.remove('modal--active');
+  //   // Get panel element for new timer
+  //   // var parEl = document.querySelector('.score-panel');
+  //   // appStopwatch = new StopWatch(parEl);
+
+  //   // Remove deck element
+  //   // var deckEl = document.querySelector('.deck');
+  //   // deckEl.remove();
 
 
-    // Start Game
-    newGame();
+  //   // var myModal = new Modal();
+  //   // Hide the modal element
+  //   // var modal = document.querySelector('.modal');
+  //   // var getModal = document.querySelector('modal');
+  //   // if (getModal) {
+  //   //   getModal.remove();
+  //   //   getModal = null;
+  //   // }
+  //   // modal = new Modal();
+  //   // modal.classList.remove('modal--active');
 
-  };
+
+  //   // Start Game
+  //   // newGame();
+
+  // };
 
   function resetBoard() {
+    console.clear();
     // custom
     // Reset user counts
     userMoveCount = 0;
 
+    var deckEl = document.querySelector('.deck');
+    deckEl.remove();
+
     // Reset the following:
     // - timer
-    appStopwatch.destroy();
+    // appStopwatch.destroy();
     // - stars
     updateStars(userMoveCount);
     // - gameboard
-    init(); // should come last
+    // init(); // should come last
+    newGame();
+
   }
 
 
@@ -386,7 +393,7 @@ var MemoryGameApp = (function() {
     // Add event listeners
 
     // document.addEventListener('DOMContentLoaded', init);
-    init();
+    // resetBoard();
 
     resetBoard();
 
