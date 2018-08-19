@@ -32,9 +32,12 @@ var MemoryGameApp = (function() {
   var openCardsCount = 0;
   var totalOpenCardsCount = 0;
   var userMoveCount = 0;
+
   var firstGuess = '';
   var secondGuess = '';
-  var delay = 700;
+  var previousTarget = null;
+  var delay = 1200;
+
   var appStopwatch;
   var modal;
 
@@ -43,8 +46,6 @@ var MemoryGameApp = (function() {
 
   // User configurable settings
   var settings = {};
-
-
 
 
 
@@ -251,6 +252,10 @@ var MemoryGameApp = (function() {
       return array;
   };
 
+
+
+
+
   // TODO: Re/move this function.
   function cheatTable(cardsArr) {
     var tabularLog= [];
@@ -276,23 +281,10 @@ var MemoryGameApp = (function() {
   }
 
 
-  function updateStarRating(userMovesCountNum) {
 
-    // totalCards = cards.length;
-    // var ratingSystem {
-    //   'Good': {
-    //     stars: 1,
-    //     minMoves: 30,
-    //   },
-    //   'Great': {
-    //     stars: 2,
-    //     minMoves: 24,
-    //   },
-    //   'Perfect': {
-    //     stars: 3,
-    //     minMoves: 20,
-    //   },
-    // };
+
+
+  function updateStarRating(userMovesCountNum) {
 
     if (!userMovesCountNum) {
       return;
@@ -314,7 +306,6 @@ var MemoryGameApp = (function() {
         updateStars(1);
         break;
     }
-
   };
 
 
@@ -367,6 +358,20 @@ var MemoryGameApp = (function() {
 
   };
 
+  function resetBoard() {
+    // custom
+    // Reset user counts
+    userMoveCount = 0;
+
+    // Reset the following:
+    // - timer
+    appStopwatch.destroy();
+    // - stars
+    updateStars(userMoveCount);
+    // - gameboard
+    init(); // should come last
+  }
+
 
   /* =======================================================
    INITIALIZATIONS AND EVENT LISTENERS
@@ -383,30 +388,19 @@ var MemoryGameApp = (function() {
     // document.addEventListener('DOMContentLoaded', init);
     init();
 
+    resetBoard();
+
     document.addEventListener('click', function(event) {
 
       // Restart evt handler
       if (event.target.closest('.restart')) {
-
-        // custom
-        // Reset user counts
-        userMoveCount = 0;
-
-        // Reset the following:
-
-        // - timer
-        appStopwatch.destroy();
-        // - stars
-        updateStars(userMoveCount);
-        // - gameboard
-        init(); // should come last
-
+        resetBoard();
       }
 
     });
-
-
   }
+
+
 
 
 
