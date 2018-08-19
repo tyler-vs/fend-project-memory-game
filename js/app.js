@@ -88,29 +88,50 @@ var MemoryGameApp = (function() {
     return shuffle(cardSymbolsdArr.concat(cardSymbolsdArr));
   };
 
+  /**
+   * Builds a card li element for the deck.
+   * @param  {[type]} cardItem [description]
+   */
+  function buildCard(cardItem) {
+      var newCard = document.createElement('li');
+      var newCardContent = document.createElement('i');
+
+      newCardContent.classList.add('fa',`fa-${cardItem}`);
+      newCard.classList.add('card');
+
+      // Append card content to the new card
+      newCard.appendChild(newCardContent);
+      return newCard;
+  }
+
+
+  function buildBoard() {
+    var deck = document.createElement('ul');
+    deck.classList.add('deck');
+    return deck;
+  }
+
+  function updateBoard() {
+
+  }
+
+
+  // function updateGame() {}
   function newGame() {
 
     // Reset things
 
-    // Reshuffle cards
-    cards = reshuffleCards(cardSymbols);
 
-    resetGuesses();
 
-    totalOpenCardsCount = 0;
-
-    // reset user moves counter
+    // updateUserMoves(userMoveCount);
     var movesCounterEl = document.querySelector('.moves');
-    movesCounterEl.textContent = userMoveCount;
+    movesCounterEl.textContent = userMoveCount; // count;
 
     // create board
-    var newDeckEl = document.createElement('ul');
-    newDeckEl.classList.add('deck');
+    var newDeckEl = buildBoard();
 
     // append to container
     var containerEl = document.querySelector('.container');
-
-    console.log('New card deck: ', cards);
 
     // display cheat table in browser js console
     var consoleCheatTable = cheatTable(cards);
@@ -121,124 +142,121 @@ var MemoryGameApp = (function() {
     // generate card deck DOM elements
     for (var i = 0; i < cards.length; i++) {
 
-      var newCard = document.createElement('li');
-      var newCardContent = document.createElement('i');
+      var cardLi = buildCard(cards[i]);
 
-      newCardContent.classList.add('fa',`fa-${cards[i]}`);
-      newCard.classList.add('card');
-
-      // Append card content to the new card
-      newCard.appendChild(newCardContent);
-
-      // console.log(newCard);
-
-      newDeckEl.appendChild(newCard);
+      newDeckEl.appendChild(cardLi);
     } // end for loop
 
     containerEl.appendChild(newDeckEl);
 
 
     // Add event delegation
-    newDeckEl.addEventListener('click', function(evt){
+    // newDeckEl.addEventListener('click', ;
+  };
 
-      var clickedCard = evt.target;
+  function updateMovesCounter(num) {
+    var movesCounterEl = document.querySelector('.moves');
+    movesCounterEl.textContent = num;
+    return;
+  }
 
-      // Check to make sure event is only
-      if (  !clickedCard.matches('.card')
-          || clickedCard.classList.contains('match')
-          || clickedCard.classList.contains('open') ) {
-        return;
-      }
+  function renderTurn(evt) {
 
-      // if (userMoveCount === 0) {
-      //   appStopwatch.start();
-      // }
+    var clickedCard = evt.target;
 
-      if (openCardsCount < 2) {
+    // Check to make sure event is only
+    if (  !clickedCard.matches('.card')
+        || clickedCard.classList.contains('match')
+        || clickedCard.classList.contains('open') ) {
+      return;
+    }
 
-        // increment count
-        openCardsCount ++;
-        userMoveCount ++;
-        updateStarRating(userMoveCount);
-        movesCounterEl.textContent = userMoveCount;
+    // if (userMoveCount === 0) {
+    //   appStopwatch.start();
+    // }
 
-        if (openCardsCount === 1) {
+    if (openCardsCount < 2) {
 
-          firstGuess = clickedCard;
-          console.log(`first guess was ${firstGuess.firstElementChild.className}.`);
-          // clickedCard.classList.add('open', 'show');
-          clickedCard.classList.add('open','show','animated','flipInY');
+      // increment count
+      openCardsCount ++;
+      userMoveCount ++;
+      updateStarRating(userMoveCount);
+      updateMovesCounter(userMoveCount);
 
-        } else {
 
-          secondGuess = clickedCard;
-          // clickedCard.classList.add('open', 'show');
-          clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
+      if (openCardsCount === 1) {
 
-          if (firstGuess !== '' && secondGuess !== '') {
-            if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+        firstGuess = clickedCard;
+        console.log(`first guess was ${firstGuess.firstElementChild.className}.`);
+        clickedCard.classList.add('open','show','animated','flipInY');
 
-              totalOpenCardsCount += 2;
-              console.log(`the total open cards count is at: ${totalOpenCardsCount}.`);
+      } else {
 
-              // winning conditional
-              if (totalOpenCardsCount === cards.length) {
-                // appStopwatch.stop();
+        secondGuess = clickedCard;
+        clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
+
+        if (firstGuess !== '' && secondGuess !== '') {
+          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+
+            totalOpenCardsCount += 2;
+            console.log(`the total open cards count is at: ${totalOpenCardsCount}.`);
+
+            // winning conditional
+            if (totalOpenCardsCount === cards.length) {
+              // appStopwatch.stop();
+
+              setTimeout(function() {
+                match();
+                resetGuesses();
+                // appStopwatch.reset();
+
+                // display modal window
+                // var modalEl = document.querySelector('.modal');
+                // var modalContent = document.querySelector('.modal-window__content');
+
+                // modalEl.classList.add('modal--active');
+                // var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
+
+                // modal.updateModalContent(modalContentText);
+                // var pEl = document.createElement('p');
+                // pEl.appendChild(document.createTextNode(modalContentText));
+                // modalContent.appendChild(pEl);
+                // modal.showModal();
 
                 setTimeout(function() {
-                  match();
-                  resetGuesses();
-                  // appStopwatch.reset();
-
-                  // display modal window
-                  // var modalEl = document.querySelector('.modal');
-                  // var modalContent = document.querySelector('.modal-window__content');
-
-                  // modalEl.classList.add('modal--active');
-                  // var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
-
-                  // modal.updateModalContent(modalContentText);
-                  // var pEl = document.createElement('p');
-                  // pEl.appendChild(document.createTextNode(modalContentText));
-                  // modalContent.appendChild(pEl);
-                  // modal.showModal();
-
-                  setTimeout(function() {
 
 
 
-                    if (confirm('Congrats, you have won the game!')) {
-                      // appStopwatch.destroy();
-                      // modal.hideModal();
-                      // init();
-                      alert('alright, lets play again!');
+                  if (confirm('Congrats, you have won the game!')) {
+                    // appStopwatch.destroy();
+                    // modal.hideModal();
+                    // init();
+                    alert('alright, lets play again!');
 
-                      resetBoard();
+                    resetBoard();
 
-                    } else {
-                      // modal.hideModal();
-                      alert('Next time!');
-                    }
-                  }, delay);
+                  } else {
+                    // modal.hideModal();
+                    alert('Next time!');
+                  }
                 }, delay);
-              } else {
-                setTimeout(match, delay);
-                setTimeout(resetGuesses, delay);
-              } // end if.. else
-
+              }, delay);
             } else {
-              setTimeout(unmatch, delay);
+              setTimeout(match, delay);
               setTimeout(resetGuesses, delay);
-            } // end if..else
+            } // end if.. else
 
-          } // end if
+          } else {
+            setTimeout(unmatch, delay);
+            setTimeout(resetGuesses, delay);
+          } // end if..else
 
-        } // end if.. else
+        } // end if
 
-      } // end if
+      } // end if.. else
 
-    });
-  };
+    } // end if
+  }
 
   function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -337,10 +355,6 @@ var MemoryGameApp = (function() {
   //   // var parEl = document.querySelector('.score-panel');
   //   // appStopwatch = new StopWatch(parEl);
 
-  //   // Remove deck element
-  //   // var deckEl = document.querySelector('.deck');
-  //   // deckEl.remove();
-
 
   //   // var myModal = new Modal();
   //   // Hide the modal element
@@ -364,6 +378,13 @@ var MemoryGameApp = (function() {
     // custom
     // Reset user counts
     userMoveCount = 0;
+    totalOpenCardsCount = 0;
+
+    // Reshuffle cards
+    cards = reshuffleCards(cardSymbols);
+
+    resetGuesses();
+
 
     var deckEl = document.querySelector('.deck');
     deckEl.remove();
@@ -393,7 +414,6 @@ var MemoryGameApp = (function() {
     // Add event listeners
 
     // document.addEventListener('DOMContentLoaded', init);
-    // resetBoard();
 
     resetBoard();
 
@@ -404,6 +424,9 @@ var MemoryGameApp = (function() {
         resetBoard();
       }
 
+      if (event.target.matches('.card')) {
+        renderTurn(event);
+      }
     });
   }
 
