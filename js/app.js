@@ -295,26 +295,23 @@ var MemoryGameApp = (function() {
     // };
 
     if (!userMovesCountNum) {
-      console.warn('Error, no user moves counter number.');
       return;
     }
 
+    // see how this works
+    // https://stackoverflow.com/a/3463944
     switch (true) {
       case userMovesCountNum <= 20:
         updateStars(3);
-        // statements_1
         break;
       case userMovesCountNum <= 24:
         updateStars(2);
-        // statements_1
         break;
       case userMovesCountNum <= 30:
         updateStars(1);
-        // statements_1
         break;
       default:
-        // statements_def
-        updateStars(0);
+        updateStars(1);
         break;
     }
 
@@ -322,6 +319,7 @@ var MemoryGameApp = (function() {
 
 
   function updateStars(total) {
+    // Select all stars
     var stars = document.querySelectorAll('.fa-star');
 
     stars.forEach(function(star, index) {
