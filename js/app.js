@@ -111,21 +111,13 @@ var MemoryGameApp = (function() {
     return deck;
   }
 
-  function updateBoard() {
-
-  }
+  // function updateBoard(state) {}
 
 
   // function updateGame() {}
   function newGame() {
 
-    // Reset things
-
-
-
-    // updateUserMoves(userMoveCount);
-    var movesCounterEl = document.querySelector('.moves');
-    movesCounterEl.textContent = userMoveCount; // count;
+    updateMovesCounter(userMoveCount);
 
     // create board
     var newDeckEl = buildBoard();
