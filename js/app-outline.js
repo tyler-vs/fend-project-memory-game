@@ -8,8 +8,9 @@ var MemoryGameApp = (function() {
   'use strict';
 
   //
-  // variables
+  // VARIABLES
   //
+
   var cardSymbols = [
     'diamond',
     'paper-plane-o',
@@ -26,6 +27,7 @@ var MemoryGameApp = (function() {
   var count = 0;
   var previousTarget = null;
   var delay = 1200;
+  var cards = [];
 
   var publicAPIs = {};
 
@@ -79,7 +81,7 @@ var MemoryGameApp = (function() {
   var createDeck = function() {
     var deck = document.querySelector('.deck');
     var containerEl = document.querySelector('.container');
-    var cards = shuffle(cardSymbols.concat(cardSymbols));
+    cards = shuffle(cardSymbols.concat(cardSymbols));
     var consoleCheatTable = cheatTable(cards);
 
     if (deck) {
@@ -123,6 +125,11 @@ var MemoryGameApp = (function() {
     selectedCards.forEach(function(card) {
       card.classList.add('match','animated','bounce');
     });
+
+    // Check if a winner
+    if (isWinner()) {
+      alert('Huurary you won!');
+    }
   };
 
   // unmatch
@@ -133,9 +140,17 @@ var MemoryGameApp = (function() {
     });
   };
 
+  // isWinner
+  var isWinner = function() {
+    var selectedCards = document.querySelectorAll('.card.match');
+    if (selectedCards.length === cards.length) {
+      return true;
+    }
+    return false;
+  }
+
   // renderTurn
   function renderTurn(event) {
-
     var clickedCard = event.target;
 
     // Check to make sure event is only
@@ -151,21 +166,31 @@ var MemoryGameApp = (function() {
       // increment count
       count++;
 
-      // if there is a count of 1 open card
+      // if there is one card opened
       if (count === 1) {
-        firstGuess = clickedCard;
+
+        // save as first guess
+        firstGuess = clickedCard.firstElementChild.className;
         clickedCard.classList.add('open','show','animated','flipInY');
+
       } else {
-        secondGuess = clickedCard;
+        // save as second guess
+        secondGuess = clickedCard.firstElementChild.className;
         clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
       }
 
-
+      // check that both first and second guesses are not empty
       if (firstGuess !== '' && secondGuess !== '') {
-        if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+        // check if first and second guess are the same
+        if (firstGuess === secondGuess) {
+
+
+          // match guesses
           setTimeout(match, delay);
           setTimeout(resetGuesses, delay);
+
         } else {
+          // unmatch guesses
           setTimeout(unmatch, delay);
           setTimeout(resetGuesses, delay);
         }
