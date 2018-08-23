@@ -112,7 +112,7 @@ var MemoryGameApp = (function() {
   }
 
   // match
-  function match() {
+  var match = function() {
     var selectedCards = document.querySelectorAll('.open.show');
     selectedCards.forEach(function(card) {
       card.classList.add('match','animated','bounce');
@@ -120,11 +120,73 @@ var MemoryGameApp = (function() {
   };
 
   // unmatch
-  function unmatch() {
+  var unmatch = function() {
     var selectedCards = document.querySelectorAll('.open.show');
     selectedCards.forEach(function(card) {
       card.classList.add('animated','shake');
     });
+  };
+
+  // run script
+  function renderTurn(event) {
+
+    var clickedCard = event.target;
+
+    // Check to make sure event is only
+    if (  !clickedCard.matches('.card')
+        || clickedCard.classList.contains('match')
+        || clickedCard.classList.contains('open') ) {
+      return;
+    }
+
+    // if there are less than 2 opened cards counted
+    if (count < 2) {
+
+      // increment count
+      count++;
+
+      // if there is a count of 1 open card
+      if (count === 1) {
+
+        firstGuess = clickedCard;
+        clickedCard.classList.add('open','show','animated','flipInY');
+
+      } else {
+
+        secondGuess = clickedCard;
+        clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
+
+        if (firstGuess !== '' && secondGuess !== '') {
+
+          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+
+            if (totalOpenCardsCount === cards.length) {
+
+              setTimeout(function() {
+                match();
+                resetGuesses();
+
+                setTimeout(function() {
+
+                  if (confirm('Congrats, you have won the game!')) {
+                    alert('alright, lets play again!');
+                    resetBoard();
+                  } else {
+                    alert('Next time!');
+                  }
+                }, delay);
+              }, delay);
+            } else {
+              setTimeout(match, delay);
+              setTimeout(resetGuesses, delay);
+            }
+          } else {
+            setTimeout(unmatch, delay);
+            setTimeout(resetGuesses, delay);
+          }
+        }
+      }
+    }
   };
 
 
@@ -149,6 +211,7 @@ var MemoryGameApp = (function() {
     // merge user options
 
     // add event listeners
+    document.addEventListener('click', renderTurn, false);
 
     // run gameStart
 
