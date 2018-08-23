@@ -133,7 +133,7 @@ var MemoryGameApp = (function() {
     });
   };
 
-  // run script
+  // renderTurn
   function renderTurn(event) {
 
     var clickedCard = event.target;
