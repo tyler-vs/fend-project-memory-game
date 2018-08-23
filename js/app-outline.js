@@ -35,7 +35,7 @@ var MemoryGameApp = (function() {
   //
 
   // reset guesses
-  function resetGuesses() {
+  var resetGuesses = function() {
     firstGuess = '';
     secondGuess = '';
     count = 0;
@@ -46,7 +46,7 @@ var MemoryGameApp = (function() {
   // unmatch
 
   // shuffle (helper)
-  function shuffle(array) {
+  var shuffle = function(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -63,7 +63,7 @@ var MemoryGameApp = (function() {
   // reshuffle (helper)
 
   // delete deck
-  function deleteDeck() {
+  var deleteDeck = function() {
     var deck = document.querySelector('.deck');
     if (! deck) {
       console.log('no deck to remove');
@@ -73,6 +73,46 @@ var MemoryGameApp = (function() {
     deck.remove();
     return;
   }
+
+  // create deck
+  var createDeck = function() {
+    var deck = document.querySelector('.deck');
+    var containerEl = document.querySelector('.container');
+    var cards = shuffle(cardSymbols.concat(cardSymbols));
+
+    if (deck) {
+      console.log('a deck already exists!');
+      return;
+    }
+
+    deck = document.createElement('ul');
+    deck.setAttribute('class', 'deck');
+
+    cards.forEach( function(element, index) {
+      // let newCard = createCard(element);
+      deck.appendChild(createCard(element));
+    });
+
+    containerEl.appendChild(deck);
+    return;
+  }
+
+  // create card
+  var createCard = function(cardItem) {
+    var newCard = document.createElement('li');
+    var newCardContent = document.createElement('i');
+
+    newCardContent.classList.add('fa',`fa-${cardItem}`);
+    newCard.classList.add('card');
+
+    // Append card content to the new card
+    newCard.appendChild(newCardContent);
+    return newCard;
+  }
+
+  // create cards
+  // var createCards = function() {
+  // }
 
 
   //
@@ -86,6 +126,10 @@ var MemoryGameApp = (function() {
     // run publicAPI.destroy()
     console.log('running init');
     deleteDeck();
+
+    createDeck();
+
+    // setTime(this.createDeck, this.delay);
 
     // feature test
 
