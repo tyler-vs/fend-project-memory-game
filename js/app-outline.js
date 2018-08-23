@@ -128,7 +128,7 @@ var MemoryGameApp = (function() {
 
     // Check if a winner
     if (isWinner()) {
-      alert('Huurary you won!');
+      alert('Hurray, you won!');
     }
   };
 
@@ -147,7 +147,7 @@ var MemoryGameApp = (function() {
       return true;
     }
     return false;
-  }
+  };
 
   // renderTurn
   function renderTurn(event) {
@@ -219,7 +219,7 @@ var MemoryGameApp = (function() {
 
     });
     return tabularLog;
-  }
+  };
 
 
   //
@@ -232,6 +232,7 @@ var MemoryGameApp = (function() {
 
     // run publicAPI.destroy()
     console.log('running init');
+
     deleteDeck();
 
     createDeck();
@@ -247,7 +248,7 @@ var MemoryGameApp = (function() {
 
     // run gameStart
 
-  }
+  };
 
   // destroy
   publicAPIs.destroy = function() {
@@ -267,7 +268,7 @@ var MemoryGameApp = (function() {
 
     // remove settings
 
-  }
+  };
 
   // ??reset??
 
