@@ -1,15 +1,7 @@
-// app-outline.js
-//
-// possitble objects/classes?
-//
-// - app
-// - stopwatch/timer
-// - star rating
-//
+/**
+ * app-outline.js
+ */
 
-
-// app
-// ---
 
 var MemoryGameApp = (function() {
 
@@ -28,25 +20,18 @@ var MemoryGameApp = (function() {
     'bicycle',
     'bomb',
   ];
-  // var cards = [];
-  // var openCardsCount = 0;
-  // var totalOpenCardsCount = 0;
-  // var userMoveCount = 0;
 
   var firstGuess = '';
   var secondGuess = '';
   var count = 0;
   var previousTarget = null;
   var delay = 1200;
-  // var appStopwatch;
-  // var modal;
 
   var publicAPIs = {};
-  // var settings = {};
 
 
   //
-  // private functions
+  // PRIVATE FUNCTIONS
   //
 
   // reset guesses
@@ -77,22 +62,30 @@ var MemoryGameApp = (function() {
 
   // reshuffle (helper)
 
-
-  /*proposed private methods*/
-
-
-
-
+  // delete deck
+  function deleteDeck() {
+    var deck = document.querySelector('.deck');
+    if (! deck) {
+      console.log('no deck to remove');
+      return;
+    }
+    console.log('removing deck');
+    deck.remove();
+    return;
+  }
 
 
   //
-  // public functions
+  // PUBLIC FUNCTIONS
   //
+
 
   // init
   publicAPIs.init = function() {
 
     // run publicAPI.destroy()
+    console.log('running init');
+    deleteDeck();
 
     // feature test
 
@@ -128,7 +121,7 @@ var MemoryGameApp = (function() {
 
 
   //
-  // inits/event listeners
+  // INITS/EVENT LISTENERS
   //
 
 
