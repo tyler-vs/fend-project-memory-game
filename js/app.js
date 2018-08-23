@@ -117,6 +117,7 @@ var MemoryGameApp = (function() {
   // function updateGame() {}
   function newGame() {
 
+    // Set back to 0
     updateMovesCounter(userMoveCount);
 
     // create board
@@ -167,6 +168,8 @@ var MemoryGameApp = (function() {
     //   appStopwatch.start();
     // }
 
+
+    // if there are less than 2 opened cards counted
     if (openCardsCount < 2) {
 
       // increment count
@@ -175,7 +178,7 @@ var MemoryGameApp = (function() {
       updateStarRating(userMoveCount);
       updateMovesCounter(userMoveCount);
 
-
+      // if there is a count of 1 open card
       if (openCardsCount === 1) {
 
         firstGuess = clickedCard;
