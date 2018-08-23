@@ -80,6 +80,7 @@ var MemoryGameApp = (function() {
     var deck = document.querySelector('.deck');
     var containerEl = document.querySelector('.container');
     var cards = shuffle(cardSymbols.concat(cardSymbols));
+    var consoleCheatTable = cheatTable(cards);
 
     if (deck) {
       console.log('a deck already exists!');
@@ -93,6 +94,11 @@ var MemoryGameApp = (function() {
       // let newCard = createCard(element);
       deck.appendChild(createCard(element));
     });
+
+
+    if (consoleCheatTable) {
+      console.table(consoleCheatTable);
+    }
 
     containerEl.appendChild(deck);
     return;
@@ -147,47 +153,48 @@ var MemoryGameApp = (function() {
 
       // if there is a count of 1 open card
       if (count === 1) {
-
         firstGuess = clickedCard;
         clickedCard.classList.add('open','show','animated','flipInY');
-
       } else {
-
         secondGuess = clickedCard;
         clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
+      }
 
-        if (firstGuess !== '' && secondGuess !== '') {
 
-          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
-
-            if (totalOpenCardsCount === cards.length) {
-
-              setTimeout(function() {
-                match();
-                resetGuesses();
-
-                setTimeout(function() {
-
-                  if (confirm('Congrats, you have won the game!')) {
-                    alert('alright, lets play again!');
-                    resetBoard();
-                  } else {
-                    alert('Next time!');
-                  }
-                }, delay);
-              }, delay);
-            } else {
-              setTimeout(match, delay);
-              setTimeout(resetGuesses, delay);
-            }
-          } else {
-            setTimeout(unmatch, delay);
-            setTimeout(resetGuesses, delay);
-          }
+      if (firstGuess !== '' && secondGuess !== '') {
+        if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+          setTimeout(match, delay);
+          setTimeout(resetGuesses, delay);
+        } else {
+          setTimeout(unmatch, delay);
+          setTimeout(resetGuesses, delay);
         }
       }
+
+      previousTarget = clickedCard;
     }
   };
+
+  // cheat table logger
+  var cheatTable = function(cardsArr) {
+    var tabularLog= [];
+    var tempArr = [];
+    var tempCount;
+    var cards = cardsArr;
+
+    var cardsTable = cards.forEach(function(card, ind) {
+      tempCount = ind + 1;
+      if ( (tempCount % 4) === 0 ) {
+        tempArr.push(card);
+        tabularLog.push(tempArr);
+        tempArr = [];
+      } else {
+        tempArr.push(card);
+      }
+
+    });
+    return tabularLog;
+  }
 
 
   //
