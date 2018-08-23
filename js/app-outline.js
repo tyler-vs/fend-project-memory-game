@@ -39,11 +39,12 @@ var MemoryGameApp = (function() {
     firstGuess = '';
     secondGuess = '';
     count = 0;
-  }
 
-  // match
-
-  // unmatch
+    var selectedCards = document.querySelectorAll('.card.open.show');
+    selectedCards.forEach(function(card) {
+      card.classList.remove('open', 'show', 'animated','flipInY', 'shake', 'bounce');
+    });
+  };
 
   // shuffle (helper)
   var shuffle = function(array) {
