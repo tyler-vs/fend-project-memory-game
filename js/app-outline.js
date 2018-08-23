@@ -111,9 +111,21 @@ var MemoryGameApp = (function() {
     return newCard;
   }
 
-  // create cards
-  // var createCards = function() {
-  // }
+  // match
+  function match() {
+    var selectedCards = document.querySelectorAll('.open.show');
+    selectedCards.forEach(function(card) {
+      card.classList.add('match','animated','bounce');
+    });
+  };
+
+  // unmatch
+  function unmatch() {
+    var selectedCards = document.querySelectorAll('.open.show');
+    selectedCards.forEach(function(card) {
+      card.classList.add('animated','shake');
+    });
+  };
 
 
   //
