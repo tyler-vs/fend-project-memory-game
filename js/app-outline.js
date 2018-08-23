@@ -28,18 +28,21 @@ var MemoryGameApp = (function() {
     'bicycle',
     'bomb',
   ];
-  var cards = [];
-  var openCardsCount = 0;
-  var totalOpenCardsCount = 0;
-  var userMoveCount = 0;
+  // var cards = [];
+  // var openCardsCount = 0;
+  // var totalOpenCardsCount = 0;
+  // var userMoveCount = 0;
+
   var firstGuess = '';
   var secondGuess = '';
-  var delay = 700;
-  var appStopwatch;
-  var modal;
+  var count = 0;
+  var previousTarget = null;
+  var delay = 1200;
+  // var appStopwatch;
+  // var modal;
 
   var publicAPIs = {};
-  var settings = {};
+  // var settings = {};
 
 
   //
@@ -47,18 +50,32 @@ var MemoryGameApp = (function() {
   //
 
   // reset guesses
+  function resetGuesses() {
+    firstGuess = '';
+    secondGuess = '';
+    count = 0;
+  }
 
   // match
 
   // unmatch
 
   // shuffle (helper)
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
 
   // reshuffle (helper)
-
-  // update star rating system
-
-  // update stars
 
 
   /*proposed private methods*/
@@ -89,6 +106,8 @@ var MemoryGameApp = (function() {
 
   // destroy
   publicAPIs.destroy = function() {
+
+    console.log('running destroy.');
 
     // only run is settings is set
     if(!settings) {
