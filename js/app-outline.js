@@ -28,6 +28,7 @@ var MemoryGameApp = (function() {
   var previousTarget = null;
   var delay = 1200;
   var cards = [];
+  var userMovesCount = 0;
 
   var publicAPIs = {};
 
@@ -149,6 +150,17 @@ var MemoryGameApp = (function() {
     return false;
   };
 
+  // updateMoveCounter
+  var updateMoveCounter = function() {
+    // Update user moves counter variable
+    userMovesCount++;
+    // Select element to update
+    var moveCounterEl = document.querySelector('.moves');
+
+    moveCounterEl.innerHTML = userMovesCount;
+    return;
+  }
+
   // renderTurn
   function renderTurn(event) {
     var clickedCard = event.target;
@@ -160,11 +172,13 @@ var MemoryGameApp = (function() {
       return;
     }
 
+
     // if there are less than 2 opened cards counted
     if (count < 2) {
 
       // increment count
       count++;
+      updateMoveCounter();
 
       // if there is one card opened
       if (count === 1) {
