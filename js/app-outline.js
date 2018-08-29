@@ -50,7 +50,8 @@ var MemoryGameApp = (function() {
 
     // Check if a winner
     if (isWinner()) {
-      alert('Hurray, you won!');
+      // console.log(`data: ${movesCounter.defaults.classInit}.`);
+      alert(`Hurray, you won! With only ${movesCounter.getCount()} moves!`);
     }
 
   };
