@@ -153,16 +153,7 @@ var MemoryGameApp = (function() {
     return false;
   };
 
-  // updateMoveCounter
-  var updateMoveCounter = function() {
-    // Update user moves counter variable
-    userMovesCount++;
-    // Select element to update
-    var moveCounterEl = document.querySelector('.moves');
 
-    moveCounterEl.innerHTML = userMovesCount;
-    return;
-  }
 
   // renderTurn
   function renderTurn(event) {
