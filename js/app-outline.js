@@ -172,7 +172,9 @@ var MemoryGameApp = (function() {
 
       // increment count
       count++;
-      updateMoveCounter();
+      // updateMoveCounter();
+      movesCounter.increment();
+
 
       // if there is one card opened
       if (count === 1) {
@@ -240,6 +242,8 @@ var MemoryGameApp = (function() {
 
     // run publicAPI.destroy()
     console.log('running init');
+
+    movesCounter.init();
 
     deleteDeck();
 
