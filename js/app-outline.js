@@ -47,6 +47,12 @@ var MemoryGameApp = (function() {
     selectedCards.forEach(function(card) {
       card.classList.remove('open', 'show', 'animated','flipInY', 'shake', 'bounce');
     });
+
+    // Check if a winner
+    if (isWinner()) {
+      alert('Hurray, you won!');
+    }
+
   };
 
   // shuffle (helper)
@@ -127,10 +133,6 @@ var MemoryGameApp = (function() {
       card.classList.add('match','animated','bounce');
     });
 
-    // Check if a winner
-    if (isWinner()) {
-      alert('Hurray, you won!');
-    }
   };
 
   // unmatch
