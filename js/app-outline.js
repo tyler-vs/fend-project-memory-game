@@ -71,8 +71,6 @@ var MemoryGameApp = (function() {
     return array;
   };
 
-  // reshuffle (helper)
-
   // delete deck
   var deleteDeck = function() {
     var deck = document.querySelector('.deck');
@@ -273,6 +271,7 @@ var MemoryGameApp = (function() {
     }
 
     // remove event listeners
+    document.removeEventListener('click', renderTurn, false);
 
     // remove plugin code
 
