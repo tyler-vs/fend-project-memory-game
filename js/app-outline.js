@@ -51,7 +51,11 @@ var MemoryGameApp = (function() {
     // Check if a winner
     if (isWinner()) {
       // console.log(`data: ${movesCounter.defaults.classInit}.`);
-      alert(`Hurray, you won! With only ${movesCounter.getCount()} moves!`);
+      if (confirm(`Congratulations Player!\nTotal Moves: ${movesCounter.getCount()} moves!\nStar Rating: 00 total stars!\nTime: 00:00:00.`)) {
+        console.log('true');
+      } else {
+        console.log('false');
+      }
     }
 
   };
