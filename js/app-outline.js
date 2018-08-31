@@ -50,15 +50,20 @@ var MemoryGameApp = (function() {
 
     // Check if a winner
     if (isWinner()) {
-      // console.log(`data: ${movesCounter.defaults.classInit}.`);
-      if (confirm(`Congratulations Player!\nTotal Moves: ${movesCounter.getCount()} moves!\nStar Rating: 00 total stars!\nTime: 00:00:00.`)) {
-        console.log('true');
-      } else {
-        console.log('false');
-      }
+      congratsPopup();
     }
 
   };
+
+  var congratsPopup = function() {
+    // console.log(`data: ${movesCounter.defaults.classInit}.`);
+    if (confirm(`Congratulations Player!\nTotal Moves: ${movesCounter.getCount()} moves!\nStar Rating: 00 total stars!\nTime: 00:00:00.`)) {
+      console.log('true');
+    } else {
+      console.log('false');
+    }
+    return;
+  }
 
   // shuffle (helper)
   var shuffle = function(array) {
