@@ -177,7 +177,8 @@ var MemoryGameApp = (function() {
         clickedCard.classList.add('open', 'show', 'animated', 'flipInY');
 
         if (firstGuess !== '' && secondGuess !== '') {
-          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+
+          /*if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
 
             totalOpenCardsCount += 2;
 
