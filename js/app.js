@@ -65,46 +65,41 @@ var MemoryGameApp = (function() {
     selectedCards.forEach(function(card) {
       card.classList.remove('open', 'show', 'animated','flipInY', 'shake', 'bounce');
     });
-  };
+  }
 
   function match() {
     var selectedCards = document.querySelectorAll('.open.show');
     selectedCards.forEach(function(card) {
       card.classList.add('match','animated','bounce');
     });
-  };
+  }
 
   function unmatch() {
     var selectedCards = document.querySelectorAll('.open.show');
     selectedCards.forEach(function(card) {
       card.classList.add('animated','shake');
     });
-  };
+  }
 
-  function reshuffleCards(cardSymbolsdArr) {
-    if (!cardSymbolsdArr) {
+  function reshuffleCards(cardSymbolsArr) {
+    if (!cardSymbolsArr) {
       return;
     }
 
-    return shuffle(cardSymbolsdArr.concat(cardSymbolsdArr));
-  };
-
-  /**
-   * Builds a card li element for the deck.
-   * @param  {[type]} cardItem [description]
-   */
-  function buildCard(cardItem) {
-      var newCard = document.createElement('li');
-      var newCardContent = document.createElement('i');
-
-      newCardContent.classList.add('fa',`fa-${cardItem}`);
-      newCard.classList.add('card');
-
-      // Append card content to the new card
-      newCard.appendChild(newCardContent);
-      return newCard;
+    return shuffle(cardSymbolsArr.concat(cardSymbolsArr));
   }
 
+  function buildCard(cardItem) {
+    var newCard = document.createElement('li');
+    var newCardContent = document.createElement('i');
+
+    newCardContent.classList.add('fa',`fa-${cardItem}`);
+    newCard.classList.add('card');
+
+    // Append card content to the new card
+    newCard.appendChild(newCardContent);
+    return newCard;
+  }
 
   function buildBoard() {
     var deck = document.createElement('ul');
@@ -112,10 +107,6 @@ var MemoryGameApp = (function() {
     return deck;
   }
 
-  // function updateBoard(state) {}
-
-
-  // function updateGame() {}
   function newGame() {
 
     updateMovesCounter(userMoveCount);
