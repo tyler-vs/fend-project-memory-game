@@ -40,7 +40,7 @@ var MemoryGameApp = (function() {
 
   // External script modules
   var appStopwatch;
-  // var modal;
+  var modal;
 
   // Public APIs Object
   var publicAPIs = {};
