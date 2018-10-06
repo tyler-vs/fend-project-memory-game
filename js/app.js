@@ -136,7 +136,7 @@ var MemoryGameApp = (function() {
 
     // Add event delegation
     // newDeckEl.addEventListener('click', ;
-  };
+  }
 
   function updateMovesCounter(num) {
     var movesCounterEl = document.querySelector('.moves');
@@ -149,9 +149,7 @@ var MemoryGameApp = (function() {
     var clickedCard = evt.target;
 
     // Check to make sure event is only
-    if (  !clickedCard.matches('.card')
-        || clickedCard.classList.contains('match')
-        || clickedCard.classList.contains('open') ) {
+    if (  !clickedCard.matches('.card') || clickedCard.classList.contains('match') || clickedCard.classList.contains('open') ) {
       return;
     }
 
@@ -171,7 +169,6 @@ var MemoryGameApp = (function() {
       if (openCardsCount === 1) {
 
         firstGuess = clickedCard;
-        console.log(`first guess was ${firstGuess.firstElementChild.className}.`);
         clickedCard.classList.add('open','show','animated','flipInY');
 
       } else {
@@ -183,7 +180,6 @@ var MemoryGameApp = (function() {
           if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
 
             totalOpenCardsCount += 2;
-            console.log(`the total open cards count is at: ${totalOpenCardsCount}.`);
 
             // winning conditional
             if (totalOpenCardsCount === cards.length) {
@@ -254,7 +250,7 @@ var MemoryGameApp = (function() {
       }
 
       return array;
-  };
+  }
 
 
 
@@ -310,7 +306,7 @@ var MemoryGameApp = (function() {
         updateStars(1);
         break;
     }
-  };
+  }
 
 
   function updateStars(total) {
@@ -355,7 +351,7 @@ var MemoryGameApp = (function() {
   //   // Start Game
   //   // newGame();
 
-  // };
+  // }
 
   function resetBoard() {
     console.clear();
@@ -412,7 +408,7 @@ var MemoryGameApp = (function() {
         renderTurn(event);
       }
     });
-  }
+  };
 
 
 
