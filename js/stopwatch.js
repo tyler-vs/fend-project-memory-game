@@ -37,7 +37,9 @@ var StopWatch = function(parentElement, options) {
   }
 
   function createTimerEl() {
-    return document.createElement('span');
+    var spanEl = document.createElement('span');
+    spanEl.classList.add('timer');
+    return spanEl;
   }
 
   function start() {
