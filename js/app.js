@@ -445,6 +445,7 @@ var MemoryGameApp = (function() {
     // NOTE: Must pass in a dom node to use as parent element to contain
     // the stopwatch display.
     appStopwatch = new StopWatch(document.querySelector('.score-panel'));
+    modal = modalObj; // new Modal();
 
     // Add event listeners
 
