@@ -38,7 +38,8 @@ var MemoryGameApp = (function() {
   var previousTarget = null;
   var delay = 1200;
 
-  // var appStopwatch;
+  // External script modules
+  var appStopwatch;
   // var modal;
 
   // Public APIs Object
