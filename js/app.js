@@ -153,9 +153,9 @@ var MemoryGameApp = (function() {
       return;
     }
 
-    // if (userMoveCount === 0) {
-    //   appStopwatch.start();
-    // }
+    if (userMoveCount === 0) {
+      appStopwatch.start();
+    }
 
     if (openCardsCount < 2) {
 
