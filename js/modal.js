@@ -8,6 +8,7 @@ class Modal {
   constructor() {
     // DOM elements
     this.hideButtonElems = document.querySelectorAll('.js-modal-hide');
+    this.resetButtonEl = document.querySelector('.js-modal-reset');
     this.modalEl = document.querySelector('.js-modal');
     this.modalWindowEl = document.querySelector('.js-modal-window');
     this.modalContentEl = document.querySelector('.modal__content .lead');
