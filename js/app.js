@@ -183,7 +183,7 @@ var MemoryGameApp = (function() {
 
             // winning conditional
             if (totalOpenCardsCount === cards.length) {
-              // appStopwatch.stop();
+              appStopwatch.stop();
 
               setTimeout(function() {
                 match();
