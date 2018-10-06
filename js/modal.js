@@ -23,7 +23,19 @@ class Modal {
   }
 
   addEventListeners() {
-    this.hideButtonEl.addEventListener('click', this.hideModal);
+
+    // Convert node list into an array so we can use
+    // array methods like `forEach`.
+    this.hideButtonElems = Array.from(this.hideButtonElems);
+    // Loop through each array elem to attach hideModal method
+    // to each node in the array.
+    this.hideButtonElems.forEach(function(elem) {
+      elem.addEventListener('click', this.hideModal);
+    }, this);
+    // ^____ very important that `this` is passed in so that we can access
+    // `this.hideModal` and attach it. See MDN article on using `thisArg` when
+    //  using the forEach() Array method.
+
     this.modalEl.addEventListener('click', this.hideModal);
     this.modalWindowEl.addEventListener('click', this.blockClicks);
   }
