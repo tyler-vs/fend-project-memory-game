@@ -386,10 +386,15 @@ var MemoryGameApp = (function() {
    ======================================================= */
 
 
-  publicAPIs.init = function() {
+  publicAPIs.init = function(stopwatch) {
 
     // TODO: Add feature tests here
     // …
+
+    // Initialize the stopwatch module
+    // NOTE: Must pass in a dom node to use as parent element to contain
+    // the stopwatch display.
+    appStopwatch = new StopWatch(document.querySelector('.score-panel'));
 
     // Add event listeners
 
