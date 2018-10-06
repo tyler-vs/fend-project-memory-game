@@ -436,7 +436,7 @@ var MemoryGameApp = (function() {
    ======================================================= */
 
 
-  publicAPIs.init = function(stopwatch) {
+  publicAPIs.init = function(stopwatch, modalObj) {
 
     // TODO: Add feature tests here
     // …
