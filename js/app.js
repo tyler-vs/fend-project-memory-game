@@ -371,37 +371,6 @@ var MemoryGameApp = (function() {
     });
   }
 
-
-  // function init() {
-
-  //   // Clear console
-
-  //   // Reset user counts
-  //   // userMoveCount = 0;
-
-
-  //   // Get panel element for new timer
-  //   // var parEl = document.querySelector('.score-panel');
-  //   // appStopwatch = new StopWatch(parEl);
-
-
-  //   // var myModal = new Modal();
-  //   // Hide the modal element
-  //   // var modal = document.querySelector('.modal');
-  //   // var getModal = document.querySelector('modal');
-  //   // if (getModal) {
-  //   //   getModal.remove();
-  //   //   getModal = null;
-  //   // }
-  //   // modal = new Modal();
-  //   // modal.classList.remove('modal--active');
-
-
-  //   // Start Game
-  //   // newGame();
-
-  // }
-
   function resetBoard() {
     console.clear();
     // custom
