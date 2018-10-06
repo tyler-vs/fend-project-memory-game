@@ -103,9 +103,10 @@
     <script src="js/modal.js"></script>
     <script src="js/app.js"></script>
     <script>
-        // Initialize the game, pass in the stopwatch object to be used
-        // in the memory game script.
-        MemoryGameApp.init(StopWatch);
+        // Initialize the game, pass in the stopwatch and modal
+        // objects to be used in the memory game script.
+        var myModal = new Modal();
+        MemoryGameApp.init(StopWatch, myModal);
     </script>
 </body>
 </html>
