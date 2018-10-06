@@ -110,7 +110,7 @@ var MemoryGameApp = (function() {
   function newGame() {
 
     updateMovesCounter(userMoveCount);
-
+    appStopwatch = new StopWatch(document.querySelector('.score-panel'));
     // create board
     var newDeckEl = buildBoard();
 
