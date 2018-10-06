@@ -12,16 +12,20 @@ class Modal {
     this.modalEl = document.querySelector('.js-modal');
     this.modalWindowEl = document.querySelector('.js-modal-window');
     this.modalContentEl = document.querySelector('.modal__content .lead');
-
     // this.modalContent = this.modalContentEl.
 
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.updateModalContent = this.updateModalContent.bind(this);
 
+    // Invoke helper function setup all event listeners.
     this.addEventListeners();
   }
 
+  /**
+   * Add event listeners for DOM Elements used/found in the
+   * the constructor function.
+   */
   addEventListeners() {
 
     // Convert node list into an array so we can use
@@ -49,19 +53,47 @@ class Modal {
   reloadDocument() {
     document.location.reload();
   }
+
+  /**
+   * Used as a utility to prevents further propagation of
+   * the current event in the capturing and bubbling phases. In the
+   * context of this script, it will prevent the actual modal 'window'
+   * element from closing the entire modal since the modal window
+   * is a child element of the modal element. Effectively still allowing
+   * the user to click on the dark background when the modal is opened to
+   * close the modal.
+   * of the modal elem which is
+   * @param  {object} evt the event object
+   * @return {[type]}     [description]
+   */
   blockClicks (evt) {
     evt.stopPropagation();
   }
 
+  /**
+   * Displays the modal by adding a CSS class value
+   * to the modal DOM element.
+   * @return {[type]} [description]
+   */
   showModal() {
     this.modalEl.classList.add('modal--active');
   }
 
+  /**
+   * Hides the modal element.
+   * @return {[type]} [description]
+   */
   hideModal() {
     this.modalEl.classList.remove('modal--active');
   }
 
+  /**
+   * Updates the modal's content.
+   * @param  {[string]} str string text to replace content.
+   * @return {[type]}     [description]
+   */
   updateModalContent(str) {
     this.modalContentEl.textContent = str;
   }
-}
+
+} // End of Modal class.
