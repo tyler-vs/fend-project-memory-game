@@ -371,7 +371,8 @@ var MemoryGameApp = (function() {
 
     // Reset the following:
     // - timer
-    // appStopwatch.destroy();
+    // appStopwatch.reset();
+    appStopwatch.destroy();
     // - stars
     updateStars(userMoveCount);
     // - gameboard
