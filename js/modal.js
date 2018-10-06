@@ -41,6 +41,14 @@ class Modal {
     this.resetButtonEl.addEventListener('click', this.reloadDocument);
   }
 
+  /**
+   * A psuedo-restart game function that restarts by reloading the
+   * document.
+   * @return {[type]} [description]
+   */
+  reloadDocument() {
+    document.location.reload();
+  }
   blockClicks (evt) {
     evt.stopPropagation();
   }
