@@ -38,6 +38,7 @@ class Modal {
 
     this.modalEl.addEventListener('click', this.hideModal);
     this.modalWindowEl.addEventListener('click', this.blockClicks);
+    this.resetButtonEl.addEventListener('click', this.reloadDocument);
   }
 
   blockClicks (evt) {
