@@ -230,7 +230,55 @@ var MemoryGameApp = (function() {
           } else {
             setTimeout(unmatch, delay);
             setTimeout(resetGuesses, delay);
-          } // end if..else
+          } // end if..else*/
+
+          // Check if both guessed cards have the same class attrubute
+          // value. If so then they match!
+          if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
+
+            // Increment card count
+            totalOpenCardsCount += 2;
+
+            // Invoke match method to display match animation
+            setTimeout(match, delay);
+            // Invoke reset guess to display reset animation
+            setTimeout(resetGuesses, delay);
+
+
+            // Check if the total matched or "opened" cards count
+            // is equal to the total cards in the game, indicating that
+            // all cards have been matched.
+            if (totalOpenCardsCount === cards.length) {
+
+              // Stop the stopwatch timer.
+              appStopwatch.stop();
+
+              // Generate the copy/text content with the player's
+              // score and congradulatory message.
+              var modalContentText = 'Congrats, you have won the game with a total of ' + userMoveCount + ' moves!';
+
+              // Update the message to be displayed in the
+              // congrats popup.
+              modal.updateModalContent(modalContentText);
+
+              // Display the modal.
+              // NOTE: that the modal has buttons configured
+              // in it's class to either:
+              // 1. Close the modal/popup leaving the user at the
+              //    same screen as before the modal poped open.
+              // 2. Reload the page so that the player can replay.
+              //
+              // Both are handled in the modal.js script.
+              // TODO: Pass game modular game functionality so
+              // that game can reset using it's own methods instead
+              // of full page re-load.
+              modal.showModal();
+            } // End winning if statement.
+
+          } else {
+            setTimeout(unmatch, delay);
+            setTimeout(resetGuesses, delay);
+          }
 
         } // end if
 
