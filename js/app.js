@@ -178,59 +178,7 @@ var MemoryGameApp = (function() {
 
         if (firstGuess !== '' && secondGuess !== '') {
 
-          /*if (firstGuess.firstElementChild.className === secondGuess.firstElementChild.className) {
-
-            totalOpenCardsCount += 2;
-
-            // winning conditional
-            if (totalOpenCardsCount === cards.length) {
-              appStopwatch.stop();
-
-              setTimeout(function() {
-                match();
-                resetGuesses();
-                // appStopwatch.reset();
-
-                // display modal window
-                // var modalEl = document.querySelector('.modal');
-                // var modalContent = document.querySelector('.modal-window__content');
-
-                // modalEl.classList.add('modal--active');
-                // var modalContentText = `Congrats, you have won the game with a total of ${userMoveCount} moves!`;
-
-                // modal.updateModalContent(modalContentText);
-                // var pEl = document.createElement('p');
-                // pEl.appendChild(document.createTextNode(modalContentText));
-                // modalContent.appendChild(pEl);
-                // modal.showModal();
-
-                setTimeout(function() {
-
-
-
-                  if (confirm('Congrats, you have won the game!')) {
-                    // appStopwatch.destroy();
-                    // modal.hideModal();
-                    // init();
-                    alert('alright, lets play again!');
-
-                    resetBoard();
-
-                  } else {
-                    // modal.hideModal();
-                    alert('Next time!');
-                  }
-                }, delay);
-              }, delay);
-            } else {
-              setTimeout(match, delay);
-              setTimeout(resetGuesses, delay);
-            } // end if.. else
-
-          } else {
-            setTimeout(unmatch, delay);
-            setTimeout(resetGuesses, delay);
-          } // end if..else*/
+          /*Old winning conditional went here.*/
 
           // Check if both guessed cards have the same class attrubute
           // value. If so then they match!
