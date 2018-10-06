@@ -58,7 +58,7 @@ var StopWatch = function(parentElement, options) {
   function reset() {
     clearInterval(interval);
     timer = [0,0,0,0];
-    timerEl.innerHTML = '00:0E:ND';
+    timerEl.innerHTML = '00:00:00';
   }
 
   function update() {
